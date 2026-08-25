@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Fragment } from 'react';
 
 import { BLOG_POSTS, getBlogPost } from '@/lib/blogPosts';
 import { formatMonthDay } from '@/lib/deadlineUtils';
+import { CategoryIllustration } from '@/lib/illustrations';
 import { Highlighted } from '@/lib/richText';
 
 export function generateStaticParams() {
@@ -81,16 +83,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </p>
 
       {post.sections.map((section, i) => (
-        <section key={i} className="mt-10">
-          <h2 className="text-xl font-extrabold text-ink sm:text-2xl">{section.heading}</h2>
-          <div className="mt-3 flex flex-col gap-3">
-            {section.paragraphs.map((p, j) => (
-              <p key={j} className="text-base leading-relaxed text-ink-soft">
-                <Highlighted text={p} />
-              </p>
-            ))}
-          </div>
-        </section>
+        <Fragment key={i}>
+          <section className="mt-10">
+            <h2 className="text-xl font-extrabold text-ink sm:text-2xl">{section.heading}</h2>
+            <div className="mt-3 flex flex-col gap-3">
+              {section.paragraphs.map((p, j) => (
+                <p key={j} className="text-base leading-relaxed text-ink-soft">
+                  <Highlighted text={p} />
+                </p>
+              ))}
+            </div>
+          </section>
+          {/* 문단 중간중간에 귀여운 삽화를 넣어달라는 요청(2026-08-25) — 매 섹션마다 넣으면
+              과하니, 대략 초반(1번째 섹션 뒤)과 중반(3번째 섹션 뒤) 두 군데만 넣음 */}
+          {(i === 0 || i === 2) && <CategoryIllustration categoryLabel={post.categoryLabel} />}
+        </Fragment>
       ))}
 
       {post.sourceLinks.length > 0 && (
