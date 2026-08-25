@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { CATEGORY_COLOR, CATEGORY_ICON, CATEGORY_LABEL, ddayStyle } from '@/lib/colors';
 import { computeDday, formatMonthDay } from '@/lib/deadlineUtils';
 import { supabaseServer } from '@/lib/supabaseServer';
