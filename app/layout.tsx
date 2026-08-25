@@ -17,8 +17,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Fit Me — 나에게 맞는 청년정책',
   description: '흩어진 청년정책 공고를 한곳에 모아 마감일과 지원 조건을 보여주는 서비스, Fit Me.',
-  // Google Search Console 소유권 확인용(2026-08-25 등록). 도메인이 바뀌면 새로 발급받아 갱신해야 함.
-  verification: { google: 'fGDM6Y-2wHIspt9KFeOaghgwWZlP8_E2Zzc5fCTw7Zw' },
+  // Google Search Console 소유권 확인용 — 첫 번째는 make-web-eta.vercel.app 속성용(2026-08-25),
+  // 두 번째는 실제 도메인 fitme.kr 연결 후 새로 등록한 속성용(같은 날, 커스텀 도메인 연결 직후).
+  // 둘 다 남겨둠 — 두 속성 모두 계속 인증된 상태로 유지하려고.
+  verification: {
+    google: [
+      'fGDM6Y-2wHIspt9KFeOaghgwWZlP8_E2Zzc5fCTw7Zw',
+      'l71VzqVTzJz8ZCvqxJP3iT4IXVALcVFGL7H8vuMbQVk',
+    ],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
