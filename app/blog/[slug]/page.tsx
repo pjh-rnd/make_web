@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 
 import { BLOG_POSTS, getBlogPost } from '@/lib/blogPosts';
 import { formatMonthDay } from '@/lib/deadlineUtils';
+import { Highlighted } from '@/lib/richText';
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({ slug: post.slug }));
@@ -23,27 +24,20 @@ export async function generateMetadata({
   };
 }
 
-function Section({ title, items }: { title: string; items: string[] }) {
-  if (items.length === 0) return null;
-  return (
-    <section className="mt-8">
-      <h2 className="text-lg font-bold text-ink">{title}</h2>
-      <ul className="mt-3 flex flex-col gap-2">
-        {items.map((item, i) => (
-          <li key={i} className="flex gap-2 text-ink-soft">
-            <span className="text-mint">·</span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
+// 공고 원문 페이지를 실제로 캡처해서 보여줌 — 워드프레스가 무료로 제공하는 mshots 스크린샷
+// 서비스(https://s.wordpress.com/mshots/v1/)를 씀. 직접 스크린샷 도구를 붙이는 것보다 훨씬
+// 간단하고, 우리가 이미지 파일을 저장/관리할 필요도 없음(요청마다 그쪽 서버가 최신 캡처를 내려줌).
+// 첫 요청 땐 "캡처 중" placeholder가 뜨고 몇 초~몇 분 뒤부터 실제 캡처로 바뀌는 편.
+function screenshotUrl(pageUrl: string): string {
+  return `https://s.wordpress.com/mshots/v1/${encodeURIComponent(pageUrl)}?w=1000&h=650`;
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) notFound();
+
+  const primaryLink = post.sourceLinks[0];
 
   return (
     <article className="mx-auto max-w-2xl px-6 py-10">
@@ -55,21 +49,52 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {post.categoryLabel} · {post.orgName}
       </p>
       <h1 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">{post.title}</h1>
+      <p className="mt-3 text-lg font-semibold text-mint">{post.hook}</p>
       <p className="mt-2 text-xs text-ink-soft">
         {post.startDate && post.deadlineDate
           ? `신청기간 ${formatMonthDay(post.startDate)} ~ ${formatMonthDay(post.deadlineDate)}`
           : '상시모집'}
       </p>
 
-      <p className="mt-6 text-base leading-relaxed text-ink">{post.intro}</p>
+      {primaryLink && (
+        <a
+          href={primaryLink.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 block overflow-hidden rounded-xl border border-line bg-paper-raise"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element -- 외부 캡처 이미지라 next/image
+              remotePatterns 설정보단 그냥 img 태그가 더 간단함(도메인 하나 때문에 설정 추가 X) */}
+          <img
+            src={screenshotUrl(primaryLink.url)}
+            alt={`${post.orgName} 공식 공고 페이지 캡처`}
+            className="w-full"
+          />
+          <p className="border-t border-line px-4 py-2 text-xs text-ink-soft">
+            📸 공고 원문 페이지 캡처 · {primaryLink.label}
+          </p>
+        </a>
+      )}
 
-      <Section title="지원 대상" items={post.target} />
-      <Section title="지원 내용" items={post.support} />
-      <Section title="신청 방법" items={post.applyMethod} />
-      <Section title="제출 서류" items={post.documents} />
+      <p className="mt-6 text-base leading-relaxed text-ink">
+        <Highlighted text={post.intro} />
+      </p>
+
+      {post.sections.map((section, i) => (
+        <section key={i} className="mt-10">
+          <h2 className="text-xl font-extrabold text-ink sm:text-2xl">{section.heading}</h2>
+          <div className="mt-3 flex flex-col gap-3">
+            {section.paragraphs.map((p, j) => (
+              <p key={j} className="text-base leading-relaxed text-ink-soft">
+                <Highlighted text={p} />
+              </p>
+            ))}
+          </div>
+        </section>
+      ))}
 
       {post.sourceLinks.length > 0 && (
-        <section className="mt-8 rounded-xl bg-mint-soft p-4">
+        <section className="mt-10 rounded-xl bg-mint-soft p-4">
           <h2 className="text-sm font-bold text-ink">공식 링크</h2>
           <ul className="mt-2 flex flex-col gap-1">
             {post.sourceLinks.map((link) => (

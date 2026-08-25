@@ -40,7 +40,7 @@ export default function BlogIndex() {
                   {post.categoryLabel}
                 </span>
                 <h2 className="text-lg font-bold text-ink">{post.title}</h2>
-                <p className="mt-1 line-clamp-2 text-sm text-ink-soft">{post.intro}</p>
+                <p className="mt-1 text-sm font-semibold text-mint">{post.hook}</p>
                 <p className="mt-2 text-xs text-ink-soft">{post.orgName}</p>
               </Link>
             </li>
