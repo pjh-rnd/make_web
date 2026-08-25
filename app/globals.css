@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
+/* moa-app(모바일 앱) constants/moa-colors.ts와 값을 맞춘 팔레트. 앱이 라이트 팔레트로 고정돼
+   있어서(시스템 다크모드와 무관) 이 웹사이트도 똑같이 라이트로 고정함 — 같은 브랜드인데 앱은
+   밝고 웹은 어두우면 어색해서. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-paper: #f6f4ee;
+  --color-paper-raise: #ffffff;
+  --color-ink: #16233f;
+  --color-ink-soft: #4a5875;
+  --color-line: #e1ddd1;
+
+  --color-mint: #2f9e7c;
+  --color-mint-soft: #e3f3ec;
+  --color-amber: #e8873a;
+  --color-amber-soft: #fcebda;
+  --color-coral: #d9564a;
+  --color-coral-soft: #fbe6e3;
+  --color-sky: #3b7dc4;
+  --color-sky-soft: #dce9f7;
+  --color-violet: #8b5fbf;
+  --color-violet-soft: #ede4f5;
+  --color-rose: #c2508a;
+  --color-rose-soft: #f6e1ec;
+  --color-lime: #5e8c34;
+  --color-lime-soft: #e3f2cb;
+  --color-closed-gray: #8c8c8c;
+  --color-closed-gray-soft: #e2e2e2;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-paper: var(--color-paper);
+  --color-paper-raise: var(--color-paper-raise);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-line: var(--color-line);
+  --color-mint: var(--color-mint);
+  --color-mint-soft: var(--color-mint-soft);
+  --color-amber: var(--color-amber);
+  --color-amber-soft: var(--color-amber-soft);
+  --color-coral: var(--color-coral);
+  --color-coral-soft: var(--color-coral-soft);
+  --color-sky: var(--color-sky);
+  --color-sky-soft: var(--color-sky-soft);
+  --color-violet: var(--color-violet);
+  --color-violet-soft: var(--color-violet-soft);
+  --color-rose: var(--color-rose);
+  --color-rose-soft: var(--color-rose-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
 }

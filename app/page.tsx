@@ -1,69 +1,91 @@
-import Image from "next/image";
+import Link from 'next/link';
 
-export default function Home() {
+import { CATEGORY_COLOR, CATEGORY_ICON, CATEGORY_LABEL, ddayStyle } from '@/lib/colors';
+import { computeDday, formatMonthDay } from '@/lib/deadlineUtils';
+import { supabaseServer } from '@/lib/supabaseServer';
+
+// 홈페이지는 로그인 없이 누구나 보는 공개 페이지라, moa-app(모바일 앱)처럼 "찜한 것만" 보여주지
+// 않고 전체 정책 목록을 마감 임박순으로 보여줌 — 웹은 검색엔진 유입/첫 방문자를 위한 창구라
+// "이렇게나 많은 정책이 있구나"를 바로 보여주는 게 목적에 더 맞음.
+export const revalidate = 3600; // 1시간마다 재생성(정책 데이터는 npm run sync-policies로만 바뀜)
+
+type PolicyRow = {
+  id: string;
+  category: string;
+  title: string;
+  meta: string;
+  org_name: string | null;
+  start_date: string | null;
+  deadline_date: string | null;
+};
+
+async function getPolicies(): Promise<PolicyRow[]> {
+  const { data, error } = await supabaseServer
+    .from('policies')
+    .select('id, category, title, meta, org_name, start_date, deadline_date')
+    .order('deadline_date', { ascending: true, nullsFirst: false })
+    .range(0, 1999);
+
+  if (error) {
+    console.error('[home] 정책 목록 조회 실패:', error.message);
+    return [];
+  }
+  return data ?? [];
+}
+
+export default async function Home() {
+  const policies = await getPolicies();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="mx-auto max-w-5xl px-6 py-10">
+      <section className="mb-10">
+        <h1 className="text-2xl font-bold text-ink sm:text-3xl">나에게 맞는 청년정책, 한눈에</h1>
+        <p className="mt-2 text-ink-soft">
+          여기저기 흩어진 청년정책 공고를 한곳에 모아 마감일과 지원 조건을 보여드려요. 지금{' '}
+          <strong className="text-mint">{policies.length}건</strong>의 공고를 모아뒀어요.
+        </p>
+      </section>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {policies.map((p) => {
+          const dday = computeDday(p.start_date, p.deadline_date);
+          const badge = ddayStyle(dday.phase);
+          const catColor = CATEGORY_COLOR[p.category as keyof typeof CATEGORY_COLOR] ?? '#999';
+          return (
+            <article
+              key={p.id}
+              className="flex flex-col justify-between rounded-2xl border border-line bg-paper-raise p-5 shadow-sm transition hover:shadow-md"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+              <div>
+                <div className="mb-3 flex items-center justify-between">
+                  <span
+                    className="rounded-full px-2.5 py-1 text-xs font-semibold"
+                    style={{ backgroundColor: `${catColor}22`, color: catColor }}
+                  >
+                    {CATEGORY_ICON[p.category] ?? ''} {CATEGORY_LABEL[p.category] ?? p.category}
+                  </span>
+                  <span
+                    className="rounded-full px-2.5 py-1 text-xs font-semibold"
+                    style={{ backgroundColor: badge.bg, color: badge.text }}
+                  >
+                    {dday.label}
+                  </span>
+                </div>
+                <h2 className="line-clamp-2 text-base font-bold text-ink">{p.title}</h2>
+                <p className="mt-1 text-sm text-ink-soft">{p.meta}</p>
+              </div>
+              <div className="mt-4 flex items-center justify-between text-xs text-ink-soft">
+                <span>
+                  {p.start_date && p.deadline_date
+                    ? `${formatMonthDay(p.start_date)} ~ ${formatMonthDay(p.deadline_date)}`
+                    : '상시모집'}
+                </span>
+                <span className="truncate pl-2">{p.org_name}</span>
+              </div>
+            </article>
+          );
+        })}
+      </div>
     </div>
   );
 }
