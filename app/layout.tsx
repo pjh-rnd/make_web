@@ -40,7 +40,15 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         </header>
         <main className="flex-1">{children}</main>
         <footer className="border-t border-line py-8 text-center text-xs text-ink-soft">
-          Fit Me · 정책 데이터는 온통청년 오픈API를 기반으로 정리됩니다.
+          <p>Fit Me · 정책 데이터는 온통청년 오픈API를 기반으로 정리됩니다.</p>
+          <p className="mt-2 flex justify-center gap-4">
+            <Link href="/about" className="hover:text-ink">
+              소개
+            </Link>
+            <Link href="/privacy" className="hover:text-ink">
+              개인정보처리방침
+            </Link>
+          </p>
         </footer>
       </body>
     </html>
