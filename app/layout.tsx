@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Link from 'next/link';
+import Script from 'next/script';
 
 import './globals.css';
 
@@ -31,6 +32,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="ko" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <head>
+        {/* Google AdSense 사이트 연결 코드(2026-08-25 등록, publisher ID: pub-9218935405137635).
+            next/script의 beforeInteractive는 App Router에서 루트 레이아웃에 한해 <head> 안에
+            그대로 렌더링됨 — 애드센스가 요구하는 "모든 페이지의 <head>에 있어야 함" 조건을
+            만족시키려고 이 전략을 씀(afterInteractive는 <body> 끝에 들어가서 요건과 안 맞음). */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9218935405137635"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <header className="border-b border-line bg-paper-raise">
           <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
