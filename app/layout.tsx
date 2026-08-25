@@ -26,6 +26,11 @@ export const metadata: Metadata = {
       'fGDM6Y-2wHIspt9KFeOaghgwWZlP8_E2Zzc5fCTw7Zw',
       'l71VzqVTzJz8ZCvqxJP3iT4IXVALcVFGL7H8vuMbQVk',
     ],
+    // 애드센스 "사이트 연결" 확인용 메타태그. next/script의 beforeInteractive 스크립트는
+    // Next.js가 __next_s 큐 방식으로 바꿔 넣어서(실제 <script src=...> 형태 그대로가 아님)
+    // 구글의 사이트 확인 크롤러가 못 찾아 "사이트를 확인할 수 없습니다" 에러가 났음(2026-08-25) —
+    // 이 메타태그는 순수 정적 HTML이라 그런 변형 없이 그대로 나가서 확실하게 인식됨.
+    other: { 'google-adsense-account': 'ca-pub-9218935405137635' },
   },
 };
 
