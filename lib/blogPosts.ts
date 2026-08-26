@@ -146,6 +146,24 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '고용24에서 신청하기', url: 'https://www.work24.go.kr/cm/main.do' }],
+    thumbnail: '/blog/national-employment-support-program/thumbnail.png',
+    images: [
+      {
+        src: '/blog/national-employment-support-program/info-period.png',
+        alt: '국민취업지원제도 신청기간 (연중 상시, 1.1~12.31)',
+        position: { section: 0, paragraph: 0 }, // 대상 소개 문단 위 — 정해진 기간 없이 상시 신청 가능하다는 맥락
+      },
+      {
+        src: '/blog/national-employment-support-program/info-steps.png',
+        alt: '국민취업지원제도 신청 5단계: 유형 확인부터 수당 받기까지',
+        position: { section: 2, paragraph: 0 }, // "고용24에서 신청하면 돼요" 문단 위
+      },
+      {
+        src: '/blog/national-employment-support-program/info-final-summary.png',
+        alt: '국민취업지원제도 대상·유형별 수당·신청방법 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'jeju-1000-won-breakfast',
@@ -261,6 +279,28 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '부산청년플랫폼', url: 'https://young.busan.go.kr/index.nm?menuCd=49' },
       { label: '한국장학재단', url: 'https://www.kosaf.go.kr' },
+    ],
+    thumbnail: '/blog/busan-student-loan-interest-support/thumbnail.png',
+    // 2026-08-26: info-period는 "마감일이 원본과 다르다" 문단과 8.28/8.31 팩트가 정확히 일치해서
+    // 그 문단 바로 위에 붙임. info-steps는 재학·휴학증명서 등 원문엔 없던 신청 절차 디테일이 담겨
+    // 있는데, "구체적인 신청 방법은 원문에 안내돼 있지 않다"는 문장 바로 옆에 두면 모순돼 보여서
+    // 그 문단은 피하고 이런 분이라면 섹션 앞에 배치함.
+    images: [
+      {
+        src: '/blog/busan-student-loan-interest-support/info-period.png',
+        alt: '부산 학자금 대출이자 지원 신청기간 (7.6 ~ 8.28, 원문 8.31보다 3일 빠름)',
+        position: { section: 2, paragraph: 0 }, // "실제 마감일은 8월 28일" 문단 위
+      },
+      {
+        src: '/blog/busan-student-loan-interest-support/info-steps.png',
+        alt: '부산 학자금 대출이자 지원 신청 5단계: 자격 확인부터 원금 차감까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/busan-student-loan-interest-support/info-final-summary.png',
+        alt: '부산 학자금 대출이자 지원 대상·지원내용·마감일 한눈에 정리',
+        position: 'end',
+      },
     ],
   },
   {
