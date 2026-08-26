@@ -75,23 +75,23 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sourceLinks: [{ label: '한국장학재단 신청 바로가기', url: 'https://www.kosaf.go.kr/' }],
     thumbnail: '/blog/national-scholarship-work-study/thumbnail.png',
-    // 2026-08-26: 첫 버전 이미지는 작은 글씨 디테일에 AI 생성 특유의 깨진 한글이 섞여있어서
-    // (예: "부펙 응기", "유열한 시간") 사용자가 다시 만들어서 교체함 — 자격/혜택 카드 3장으로 재구성.
+    // 2026-08-26: 세 번째 버전 — 사용자가 신청기간/신청방법(5단계)/최종정리 카드로 다시 제작해서
+    // 교체함. 이전 두 버전(손그림 SVG, 첫 AI 카드뉴스에서 텍스트 깨짐)보다 훨씬 깔끔함.
     images: [
       {
-        src: '/blog/national-scholarship-work-study/info-eligibility-benefits.png',
-        alt: '국가근로장학금 지원 자격 & 성적 기준, 근로 유형별 시급 상세',
-        afterSection: 1,
-      },
-      {
-        src: '/blog/national-scholarship-work-study/info-apply-schedule.png',
-        alt: '국가근로장학금 2차 신청 일정 & 방법, 신청 전 체크리스트',
+        src: '/blog/national-scholarship-work-study/info-period.png',
+        alt: '국가근로장학금 2차 신청기간 (8.12 시작 ~ 9.9 마감)',
         afterSection: 2,
       },
       {
-        src: '/blog/national-scholarship-work-study/info-tips.png',
-        alt: '국가근로장학금 교내·교외 근로 요약, 이력서 스펙 강화 및 시간 활용 꿀팁',
-        afterSection: 3,
+        src: '/blog/national-scholarship-work-study/info-steps.png',
+        alt: '국가근로장학금 신청 5단계: 재단 접속부터 서류 제출까지',
+        afterSection: 2,
+      },
+      {
+        src: '/blog/national-scholarship-work-study/info-final-summary.png',
+        alt: '국가근로장학금 지원자격·시급·신청기간·서류제출 한눈에 정리',
+        afterSection: 4,
       },
     ],
   },
