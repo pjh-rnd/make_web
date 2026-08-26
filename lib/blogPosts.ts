@@ -348,6 +348,24 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '복지로에서 신청하기', url: 'https://www.bokjiro.go.kr/' }],
+    thumbnail: '/blog/gwangju-youth-rent-support/thumbnail.jpg',
+    images: [
+      {
+        src: '/blog/gwangju-youth-rent-support/info-steps.jpg',
+        alt: '청년월세지원 신청 5단계: 자격 확인부터 소급 지급까지',
+        position: { section: 2, paragraph: 0 }, // "온라인은 복지로에서..." 문단 위
+      },
+      {
+        src: '/blog/gwangju-youth-rent-support/info-period.jpg',
+        alt: '청년월세지원 실제 접수 시기 (매년 3~5월, 놓치면 1년 대기)',
+        position: { section: 2, paragraph: 1 }, // "접수 시기가 정해져 있어요. 매년 3~5월..." 문단 위
+      },
+      {
+        src: '/blog/gwangju-youth-rent-support/info-final-summary.jpg',
+        alt: '청년월세지원 대상·금액·기간·접수시기 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'k-startup-awards',
@@ -398,6 +416,27 @@ export const BLOG_POSTS: BlogPost[] = [
         url: 'https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancClssCd=PBC010&schStr=%EA%B2%BD%EC%A7%84%EB%8C%80%ED%9A%8C&schM=view&pbancSn=176910',
       },
     ],
+    thumbnail: '/blog/k-startup-awards/thumbnail.jpg',
+    // 2026-08-26: 신청방법 카드는 예선리그/본선 등 원문에 없는 진행 절차 디테일을 담고 있고,
+    // 우리 글은 "구체적인 신청 방법은 안내돼 있지 않다"고 써놨음 — 그 문장 바로 옆에 두면
+    // 모순돼 보여서 이런 분이라면 섹션 앞으로 옮김(부산 학자금대출 글과 같은 처리).
+    images: [
+      {
+        src: '/blog/k-startup-awards/info-period.jpg',
+        alt: 'K-스타트업 2026 접수기간 (3.27 ~ 8.31)',
+        position: { section: 2, paragraph: 0 }, // "접수 마감은 2026년 8월 31일이에요" 문단 위
+      },
+      {
+        src: '/blog/k-startup-awards/info-steps.jpg',
+        alt: 'K-스타트업 2026 신청방법 5단계: 자격 확인부터 본선·왕중왕전까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/k-startup-awards/info-final-summary.jpg',
+        alt: 'K-스타트업 2026 지원자격·시상·상금·접수기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'wonju-interview-suit-rental',
@@ -446,6 +485,24 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '원주시 프로그램 신청', url: 'https://www.wonju.go.kr/wjyouth/viewTnWjyouthProgrmU.do?progrmNo=52&key=5942' },
     ],
+    thumbnail: '/blog/wonju-interview-suit-rental/thumbnail.jpg',
+    images: [
+      {
+        src: '/blog/wonju-interview-suit-rental/info-period.jpg',
+        alt: '원주 청년 면접정장 무료대여 신청기간 (2.2 ~ 11.30)',
+        position: { section: 2, paragraph: 0 }, // "신청 기간은 2026년 2월 2일부터..." 문단 위
+      },
+      {
+        src: '/blog/wonju-interview-suit-rental/info-steps.jpg',
+        alt: '면접정장 대여 신청방법 5단계: 자격 확인부터 3박 4일 대여까지',
+        position: { section: 2, paragraph: 1 }, // "방문 신청은 청년라운지에서..." 문단 위
+      },
+      {
+        src: '/blog/wonju-interview-suit-rental/info-final-summary.jpg',
+        alt: '면접정장 무료대여 대상·지원내용·신청기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'asan-young-rich-financial-counseling',
@@ -493,6 +550,24 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '충남청년포털 공고 보기', url: 'https://youth.chungnam.go.kr/web/main/customSupp/M040-06/view?bizId=A20260402LC000000000003165' },
     ],
+    thumbnail: '/blog/asan-young-rich-financial-counseling/thumbnail.jpg',
+    images: [
+      {
+        src: '/blog/asan-young-rich-financial-counseling/info-period.jpg',
+        alt: '아산 청년 재무상담 영앤리치 신청기간 (2.1 ~ 11.30, 선착순)',
+        position: { section: 0, paragraph: 0 },
+      },
+      {
+        src: '/blog/asan-young-rich-financial-counseling/info-steps.jpg',
+        alt: '영앤리치 신청방법 5단계: 자격 확인부터 1:1 상담까지',
+        position: { section: 2, paragraph: 0 }, // "신청서와 증빙서류를 이메일로..." 문단 위
+      },
+      {
+        src: '/blog/asan-young-rich-financial-counseling/info-final-summary.jpg',
+        alt: '영앤리치 대상·상담내용·신청기간·증빙서류 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'yeosu-book-purchase-support',
@@ -538,6 +613,24 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '여수시립도서관 신청 바로가기', url: 'https://yslib.yeosu.go.kr/youth' }],
+    thumbnail: '/blog/yeosu-book-purchase-support/thumbnail.jpg',
+    images: [
+      {
+        src: '/blog/yeosu-book-purchase-support/info-period.jpg',
+        alt: '여수 청년 도서구입비 지원 신청기간 (2.1 ~ 11.30)',
+        position: { section: 0, paragraph: 0 },
+      },
+      {
+        src: '/blog/yeosu-book-purchase-support/info-steps.jpg',
+        alt: '도서구입비 지원 신청방법 5단계: 회원증 발급부터 50% 지원까지',
+        position: { section: 2, paragraph: 0 }, // "여수시립도서관 누리집에서..." 문단 위
+      },
+      {
+        src: '/blog/yeosu-book-purchase-support/info-final-summary.jpg',
+        alt: '여수 도서구입비 지원 대상·금액·인정도서·신청기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'wonju-study-cafe-support',
