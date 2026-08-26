@@ -94,8 +94,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       {post.sections.map((section, i) => {
         // 2026-08-26: 공고 담당자가 실제로 만든 카드뉴스 이미지를 받은 글은 그걸 해당 섹션 뒤에
-        // 순서대로 꽂아줌(post.images). 없는 글은 기존처럼 이모지 삽화로 대체 — 매 섹션마다 넣으면
-        // 과하니, 대략 초반(1번째 섹션 뒤)과 중반(3번째 섹션 뒤) 두 군데만 넣음(2026-08-25 결정).
+        // 순서대로 꽂아줌(post.images). 이 필드가 있는 글은 이모지 삽화를 아예 안 씀(사용자 요청:
+        // "기존에 있던 그림은 다 빼") — 이미지가 안 걸린 섹션 뒤라고 이모지로 채우지 않음.
+        // post.images가 아예 없는 글만 기존처럼 이모지 삽화로 대체(초반/중반 두 군데, 2026-08-25 결정).
+        const hasCustomImages = Boolean(post.images && post.images.length > 0);
         const sectionImages = post.images?.filter((img) => img.afterSection === i) ?? [];
         return (
           <Fragment key={i}>
@@ -119,7 +121,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     className="my-8 w-full rounded-xl border border-line"
                   />
                 ))
-              : (i === 0 || i === 2) && <CategoryIllustration categoryLabel={post.categoryLabel} />}
+              : !hasCustomImages &&
+                (i === 0 || i === 2) && <CategoryIllustration categoryLabel={post.categoryLabel} />}
           </Fragment>
         );
       })}

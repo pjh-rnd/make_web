@@ -184,6 +184,19 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '제주특별자치도 홈페이지', url: 'https://www.jeju.go.kr/index.htm' }],
+    thumbnail: '/blog/jeju-1000-won-breakfast/thumbnail.jpg',
+    images: [
+      {
+        src: '/blog/jeju-1000-won-breakfast/info-eligibility.jpg',
+        alt: '제주 천원의 아침밥 대상 및 이용 방법, 지원 혜택 안내',
+        afterSection: 1,
+      },
+      {
+        src: '/blog/jeju-1000-won-breakfast/info-schools.jpg',
+        alt: '제주대·한라대·관광대 학교별 상세 운영 안내 및 체크리스트',
+        afterSection: 2,
+      },
+    ],
   },
   {
     slug: 'busan-student-loan-interest-support',
