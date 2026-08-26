@@ -58,6 +58,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           : '상시모집'}
       </p>
 
+      {post.thumbnail && (
+        // eslint-disable-next-line @next/next/no-img-element -- 공고 담당자가 만든 카드뉴스형
+        // 고정 이미지라, 아래 캡처 이미지와 같은 이유로 next/image 없이 간단하게 처리
+        <img
+          src={post.thumbnail}
+          alt={`${post.title} 썸네일`}
+          className="mt-6 w-full rounded-xl border border-line"
+        />
+      )}
+
       {primaryLink && (
         <a
           href={primaryLink.url}
@@ -82,23 +92,37 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <Highlighted text={post.intro} />
       </p>
 
-      {post.sections.map((section, i) => (
-        <Fragment key={i}>
-          <section className="mt-10">
-            <h2 className="text-xl font-extrabold text-ink sm:text-2xl">{section.heading}</h2>
-            <div className="mt-3 flex flex-col gap-3">
-              {section.paragraphs.map((p, j) => (
-                <p key={j} className="text-base leading-relaxed text-ink-soft">
-                  <Highlighted text={p} />
-                </p>
-              ))}
-            </div>
-          </section>
-          {/* 문단 중간중간에 귀여운 삽화를 넣어달라는 요청(2026-08-25) — 매 섹션마다 넣으면
-              과하니, 대략 초반(1번째 섹션 뒤)과 중반(3번째 섹션 뒤) 두 군데만 넣음 */}
-          {(i === 0 || i === 2) && <CategoryIllustration categoryLabel={post.categoryLabel} />}
-        </Fragment>
-      ))}
+      {post.sections.map((section, i) => {
+        // 2026-08-26: 공고 담당자가 실제로 만든 카드뉴스 이미지를 받은 글은 그걸 해당 섹션 뒤에
+        // 순서대로 꽂아줌(post.images). 없는 글은 기존처럼 이모지 삽화로 대체 — 매 섹션마다 넣으면
+        // 과하니, 대략 초반(1번째 섹션 뒤)과 중반(3번째 섹션 뒤) 두 군데만 넣음(2026-08-25 결정).
+        const sectionImages = post.images?.filter((img) => img.afterSection === i) ?? [];
+        return (
+          <Fragment key={i}>
+            <section className="mt-10">
+              <h2 className="text-xl font-extrabold text-ink sm:text-2xl">{section.heading}</h2>
+              <div className="mt-3 flex flex-col gap-3">
+                {section.paragraphs.map((p, j) => (
+                  <p key={j} className="text-base leading-relaxed text-ink-soft">
+                    <Highlighted text={p} />
+                  </p>
+                ))}
+              </div>
+            </section>
+            {sectionImages.length > 0
+              ? sectionImages.map((img) => (
+                  // eslint-disable-next-line @next/next/no-img-element -- 위 썸네일과 동일한 이유
+                  <img
+                    key={img.src}
+                    src={img.src}
+                    alt={img.alt}
+                    className="my-8 w-full rounded-xl border border-line"
+                  />
+                ))
+              : (i === 0 || i === 2) && <CategoryIllustration categoryLabel={post.categoryLabel} />}
+          </Fragment>
+        );
+      })}
 
       {post.sourceLinks.length > 0 && (
         <section className="mt-10 rounded-xl bg-mint-soft p-4">

@@ -19,6 +19,11 @@ export type BlogPost = {
   // **이렇게** 감싼 부분은 lib/richText.tsx의 Highlighted 컴포넌트가 노란 하이라이트로 렌더링함.
   sections: { heading: string; paragraphs: string[] }[];
   sourceLinks: { label: string; url: string }[];
+  // 2026-08-26: 공고 담당자가 직접 만든 카드뉴스형 이미지(썸네일 + 인포그래픽)를 받은 글에만 채움.
+  // thumbnail은 블로그 목록 카드 + 상세 페이지 상단에 쓰고, images는 해당 섹션 뒤에 순서대로 삽입됨.
+  // 둘 다 없으면 기존처럼 lib/illustrations.tsx의 이모지 삽화(CategoryIllustration)로 대체됨.
+  thumbnail?: string;
+  images?: { src: string; alt: string; afterSection: number }[];
 };
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -69,6 +74,24 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '한국장학재단 신청 바로가기', url: 'https://www.kosaf.go.kr/' }],
+    thumbnail: '/blog/national-scholarship-work-study/thumbnail.jpg',
+    images: [
+      {
+        src: '/blog/national-scholarship-work-study/info-summary.png',
+        alt: '2026년 2학기 2차 국가근로장학금 모집 핵심 요약 카드뉴스',
+        afterSection: 1,
+      },
+      {
+        src: '/blog/national-scholarship-work-study/info-schedule.png',
+        alt: '국가근로장학금 2차 신청 안내 일정표 (8/12 신청 시작 ~ 9/16 서류 마감)',
+        afterSection: 2,
+      },
+      {
+        src: '/blog/national-scholarship-work-study/info-steps.png',
+        alt: '국가근로장학금 온라인 신청 5단계 프로세스 상세 안내',
+        afterSection: 2,
+      },
+    ],
   },
   {
     slug: 'national-employment-support-program',

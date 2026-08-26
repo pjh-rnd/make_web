@@ -31,17 +31,29 @@ export default function BlogIndex() {
             <li key={post.slug}>
               <Link
                 href={`/blog/${post.slug}`}
-                className="block rounded-2xl border border-line bg-paper-raise p-5 transition hover:shadow-md"
+                className="flex gap-4 rounded-2xl border border-line bg-paper-raise p-5 transition hover:shadow-md"
               >
-                <span
-                  className="mb-2 inline-block rounded-full px-2.5 py-1 text-xs font-semibold"
-                  style={{ backgroundColor: `${catColor}22`, color: catColor }}
-                >
-                  {post.categoryLabel}
-                </span>
-                <h2 className="text-lg font-bold text-ink">{post.title}</h2>
-                <p className="mt-1 text-sm font-semibold text-mint">{post.hook}</p>
-                <p className="mt-2 text-xs text-ink-soft">{post.orgName}</p>
+                {/* 카드뉴스 썸네일 있는 글만 보여줌 — 없는 글은 기존처럼 텍스트만 */}
+                {post.thumbnail && (
+                  // eslint-disable-next-line @next/next/no-img-element -- 목록용 작은 썸네일, 상세
+                  // 페이지의 img 태그와 같은 이유로 next/image 생략
+                  <img
+                    src={post.thumbnail}
+                    alt=""
+                    className="h-20 w-28 shrink-0 rounded-lg border border-line object-cover sm:h-24 sm:w-36"
+                  />
+                )}
+                <div className="min-w-0 flex-1">
+                  <span
+                    className="mb-2 inline-block rounded-full px-2.5 py-1 text-xs font-semibold"
+                    style={{ backgroundColor: `${catColor}22`, color: catColor }}
+                  >
+                    {post.categoryLabel}
+                  </span>
+                  <h2 className="text-lg font-bold text-ink">{post.title}</h2>
+                  <p className="mt-1 text-sm font-semibold text-mint">{post.hook}</p>
+                  <p className="mt-2 text-xs text-ink-soft">{post.orgName}</p>
+                </div>
               </Link>
             </li>
           );
