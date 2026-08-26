@@ -74,22 +74,24 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '한국장학재단 신청 바로가기', url: 'https://www.kosaf.go.kr/' }],
-    thumbnail: '/blog/national-scholarship-work-study/thumbnail.jpg',
+    thumbnail: '/blog/national-scholarship-work-study/thumbnail.png',
+    // 2026-08-26: 첫 버전 이미지는 작은 글씨 디테일에 AI 생성 특유의 깨진 한글이 섞여있어서
+    // (예: "부펙 응기", "유열한 시간") 사용자가 다시 만들어서 교체함 — 자격/혜택 카드 3장으로 재구성.
     images: [
       {
-        src: '/blog/national-scholarship-work-study/info-summary.png',
-        alt: '2026년 2학기 2차 국가근로장학금 모집 핵심 요약 카드뉴스',
+        src: '/blog/national-scholarship-work-study/info-eligibility-benefits.png',
+        alt: '국가근로장학금 지원 자격 & 성적 기준, 근로 유형별 시급 상세',
         afterSection: 1,
       },
       {
-        src: '/blog/national-scholarship-work-study/info-schedule.png',
-        alt: '국가근로장학금 2차 신청 안내 일정표 (8/12 신청 시작 ~ 9/16 서류 마감)',
+        src: '/blog/national-scholarship-work-study/info-apply-schedule.png',
+        alt: '국가근로장학금 2차 신청 일정 & 방법, 신청 전 체크리스트',
         afterSection: 2,
       },
       {
-        src: '/blog/national-scholarship-work-study/info-steps.png',
-        alt: '국가근로장학금 온라인 신청 5단계 프로세스 상세 안내',
-        afterSection: 2,
+        src: '/blog/national-scholarship-work-study/info-tips.png',
+        alt: '국가근로장학금 교내·교외 근로 요약, 이력서 스펙 강화 및 시간 활용 꿀팁',
+        afterSection: 3,
       },
     ],
   },
