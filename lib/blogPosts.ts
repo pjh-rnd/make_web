@@ -20,10 +20,15 @@ export type BlogPost = {
   sections: { heading: string; paragraphs: string[] }[];
   sourceLinks: { label: string; url: string }[];
   // 2026-08-26: 공고 담당자가 직접 만든 카드뉴스형 이미지(썸네일 + 인포그래픽)를 받은 글에만 채움.
-  // thumbnail은 블로그 목록 카드 + 상세 페이지 상단에 쓰고, images는 해당 섹션 뒤에 순서대로 삽입됨.
+  // thumbnail은 블로그 목록 카드 + 상세 페이지 상단에 쓰고, images는 아래 position에 맞춰 삽입됨.
   // 둘 다 없으면 기존처럼 lib/illustrations.tsx의 이모지 삽화(CategoryIllustration)로 대체됨.
+  //
+  // position이 { section, paragraph }면 그 문단 바로 "위"에 삽입됨(사용자 피드백: "사진 내용이랑
+  // 같은 내용이 들어가있는 글 위에 사진을 넣어줘" — 섹션 뒤에 뭉텅이로 붙이지 말고, 실제로 그
+  // 내용을 담고 있는 문단 바로 위에 정확히 붙일 것). position이 'end'면 마지막 섹션 뒤,
+  // 공식 링크 박스 앞에 삽입됨(예: 전체 내용을 한눈에 정리한 최종 요약 카드).
   thumbnail?: string;
-  images?: { src: string; alt: string; afterSection: number }[];
+  images?: { src: string; alt: string; position: { section: number; paragraph: number } | 'end' }[];
 };
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -77,21 +82,22 @@ export const BLOG_POSTS: BlogPost[] = [
     thumbnail: '/blog/national-scholarship-work-study/thumbnail.png',
     // 2026-08-26: 세 번째 버전 — 사용자가 신청기간/신청방법(5단계)/최종정리 카드로 다시 제작해서
     // 교체함. 이전 두 버전(손그림 SVG, 첫 AI 카드뉴스에서 텍스트 깨짐)보다 훨씬 깔끔함.
+    // 배치도 섹션 뒤 뭉텅이가 아니라, 실제로 그 내용을 말하는 문단 바로 위로 정확히 맞춤(사용자 피드백).
     images: [
       {
         src: '/blog/national-scholarship-work-study/info-period.png',
         alt: '국가근로장학금 2차 신청기간 (8.12 시작 ~ 9.9 마감)',
-        afterSection: 2,
+        position: { section: 2, paragraph: 0 }, // "학생 신청은 8/12~9/9예요" 문단 바로 위
       },
       {
         src: '/blog/national-scholarship-work-study/info-steps.png',
         alt: '국가근로장학금 신청 5단계: 재단 접속부터 서류 제출까지',
-        afterSection: 2,
+        position: { section: 2, paragraph: 1 }, // "한국장학재단 누리집에서 신청하고..." 문단 바로 위
       },
       {
         src: '/blog/national-scholarship-work-study/info-final-summary.png',
         alt: '국가근로장학금 지원자격·시급·신청기간·서류제출 한눈에 정리',
-        afterSection: 4,
+        position: 'end',
       },
     ],
   },
@@ -186,17 +192,24 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '제주특별자치도 홈페이지', url: 'https://www.jeju.go.kr/index.htm' }],
-    thumbnail: '/blog/jeju-1000-won-breakfast/thumbnail.jpg',
+    thumbnail: '/blog/jeju-1000-won-breakfast/thumbnail.png',
+    // 2026-08-26: 신청기간/이용방법(5단계)/최종정리 카드로 교체 — 배치도 실제 내용을 말하는
+    // 문단 바로 위로 맞춤(사용자 피드백: 섹션 뒤에 뭉텅이로 붙이지 말 것).
     images: [
       {
-        src: '/blog/jeju-1000-won-breakfast/info-eligibility.jpg',
-        alt: '제주 천원의 아침밥 대상 및 이용 방법, 지원 혜택 안내',
-        afterSection: 1,
+        src: '/blog/jeju-1000-won-breakfast/info-period.png',
+        alt: '제주 천원의 아침밥 운영기간 (4.1 ~ 12.31)',
+        position: { section: 0, paragraph: 0 }, // "제주대·한라대·관광대 재학생이면..." 문단 위
       },
       {
-        src: '/blog/jeju-1000-won-breakfast/info-schools.jpg',
-        alt: '제주대·한라대·관광대 학교별 상세 운영 안내 및 체크리스트',
-        afterSection: 2,
+        src: '/blog/jeju-1000-won-breakfast/info-steps.png',
+        alt: '제주 천원의 아침밥 이용방법 5단계: 재학생 확인부터 결제까지',
+        position: { section: 2, paragraph: 0 }, // "제주대는 월~토..." 학교별 운영시간 문단 위
+      },
+      {
+        src: '/blog/jeju-1000-won-breakfast/info-final-summary.png',
+        alt: '제주 천원의 아침밥 대상·가격·운영기간·학교별 시간 한눈에 정리',
+        position: 'end',
       },
     ],
   },

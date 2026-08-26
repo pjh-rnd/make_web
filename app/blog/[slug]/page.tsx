@@ -92,40 +92,64 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <Highlighted text={post.intro} />
       </p>
 
-      {post.sections.map((section, i) => {
-        // 2026-08-26: 공고 담당자가 실제로 만든 카드뉴스 이미지를 받은 글은 그걸 해당 섹션 뒤에
-        // 순서대로 꽂아줌(post.images). 이 필드가 있는 글은 이모지 삽화를 아예 안 씀(사용자 요청:
-        // "기존에 있던 그림은 다 빼") — 이미지가 안 걸린 섹션 뒤라고 이모지로 채우지 않음.
-        // post.images가 아예 없는 글만 기존처럼 이모지 삽화로 대체(초반/중반 두 군데, 2026-08-25 결정).
+      {/* 2026-08-26: 공고 담당자가 만든 카드뉴스 이미지가 있는 글은, 실제로 그 내용을 말하는
+          문단 바로 위에 정확히 꽂아줌(post.images의 position: {section,paragraph}) — 사용자 피드백:
+          "사진 두 장을 글 없이 붙여넣지 말고, 사진 내용이랑 같은 내용이 들어간 글 위에 넣어줘".
+          이 필드가 있는 글은 이모지 삽화를 아예 안 씀(기존에 있던 플레이스홀더 그림을 빼기 위함).
+          post.images가 아예 없는 글만 기존처럼 이모지 삽화로 대체(초반/중반 두 군데, 2026-08-25 결정). */}
+      {(() => {
         const hasCustomImages = Boolean(post.images && post.images.length > 0);
-        const sectionImages = post.images?.filter((img) => img.afterSection === i) ?? [];
-        return (
+        return post.sections.map((section, i) => (
           <Fragment key={i}>
             <section className="mt-10">
               <h2 className="text-xl font-extrabold text-ink sm:text-2xl">{section.heading}</h2>
               <div className="mt-3 flex flex-col gap-3">
-                {section.paragraphs.map((p, j) => (
-                  <p key={j} className="text-base leading-relaxed text-ink-soft">
-                    <Highlighted text={p} />
-                  </p>
-                ))}
+                {section.paragraphs.map((p, j) => {
+                  const inlineImages =
+                    post.images?.filter(
+                      (img) =>
+                        img.position !== 'end' &&
+                        img.position.section === i &&
+                        img.position.paragraph === j,
+                    ) ?? [];
+                  return (
+                    <Fragment key={j}>
+                      {inlineImages.map((img) => (
+                        // eslint-disable-next-line @next/next/no-img-element -- 위 썸네일과 동일한 이유
+                        <img
+                          key={img.src}
+                          src={img.src}
+                          alt={img.alt}
+                          className="w-full rounded-xl border border-line"
+                        />
+                      ))}
+                      <p className="text-base leading-relaxed text-ink-soft">
+                        <Highlighted text={p} />
+                      </p>
+                    </Fragment>
+                  );
+                })}
               </div>
             </section>
-            {sectionImages.length > 0
-              ? sectionImages.map((img) => (
-                  // eslint-disable-next-line @next/next/no-img-element -- 위 썸네일과 동일한 이유
-                  <img
-                    key={img.src}
-                    src={img.src}
-                    alt={img.alt}
-                    className="my-8 w-full rounded-xl border border-line"
-                  />
-                ))
-              : !hasCustomImages &&
-                (i === 0 || i === 2) && <CategoryIllustration categoryLabel={post.categoryLabel} />}
+            {!hasCustomImages && (i === 0 || i === 2) && (
+              <CategoryIllustration categoryLabel={post.categoryLabel} />
+            )}
           </Fragment>
-        );
-      })}
+        ));
+      })()}
+
+      {/* 전체 내용을 한눈에 정리한 최종 요약 카드 등 — 마지막 섹션 뒤, 공식 링크 박스 앞에 삽입 */}
+      {post.images
+        ?.filter((img) => img.position === 'end')
+        .map((img) => (
+          // eslint-disable-next-line @next/next/no-img-element -- 위 썸네일과 동일한 이유
+          <img
+            key={img.src}
+            src={img.src}
+            alt={img.alt}
+            className="mt-10 w-full rounded-xl border border-line"
+          />
+        ))}
 
       {post.sourceLinks.length > 0 && (
         <section className="mt-10 rounded-xl bg-mint-soft p-4">
