@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
 import { BLOG_POSTS, getBlogPost } from '@/lib/blogPosts';
+import { CalendarWidget } from '@/lib/CalendarWidget';
+import { DeadlineBanner } from '@/lib/DeadlineBanner';
 import { formatMonthDay } from '@/lib/deadlineUtils';
 import { CategoryIllustration } from '@/lib/illustrations';
 import { Highlighted } from '@/lib/richText';
@@ -42,10 +44,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const primaryLink = post.sourceLinks[0];
 
   return (
-    <article className="mx-auto max-w-2xl px-6 py-10">
+    <div className="mx-auto max-w-5xl px-6 py-10 lg:grid lg:grid-cols-[1fr_300px] lg:items-start lg:gap-10">
+    <article className="max-w-2xl">
       <Link href="/blog" className="text-sm text-mint hover:underline">
         ← 블로그 목록
       </Link>
+
+      {/* 2026-08-27: "페이지에 사람들을 머무르게 할 장치" — 실제 D-day 기준으로 톤을 다르게
+          보여주는 마감 임박 배너(lib/DeadlineBanner.tsx). 항상 "임박!"이라고 우기지 않도록
+          마감이 한참 남은 글은 다른 임박 공고로 자연스럽게 유도하는 버전으로 대체됨. */}
+      <DeadlineBanner startDate={post.startDate} deadlineDate={post.deadlineDate} />
 
       <p className="mt-4 text-xs font-semibold text-mint">
         {post.categoryLabel} · {post.orgName}
@@ -176,5 +184,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         링크에서 다시 확인해주세요.
       </p>
     </article>
+
+      {/* 2026-08-27: 오른쪽 여백 캘린더 — 앱 캘린더 탭처럼 공고 시작일에 점만 찍어두고, 그 점이
+          아니라 날짜 셀 전체를 눌러야 그날 시작하는 공고 목록이 펼쳐짐(lib/CalendarWidget.tsx).
+          데스크톱(lg 이상)에서만 보이고 스크롤해도 같이 따라오게 sticky 처리. */}
+      <aside className="mt-10 lg:mt-0 lg:sticky lg:top-10">
+        <CalendarWidget />
+      </aside>
+    </div>
   );
 }
