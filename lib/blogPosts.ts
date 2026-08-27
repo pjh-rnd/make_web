@@ -233,15 +233,15 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'busan-student-loan-interest-support',
-    title: '부산 대학생 학자금 대출이자 지원, 신청 전 마감일부터 확인하세요',
-    hook: '학자금 대출 이자, 부산시가 대신 갚아드려요 (근데 마감일 주의!)',
+    title: '부산 대학생 학자금 대출이자 지원, 대상부터 신청방법까지',
+    hook: '학자금 대출 이자, 낸 만큼 원금이 줄어들어요',
     categoryLabel: '교육',
     orgName: '부산광역시 청년산학국 지산학협력과',
     publishedDate: '2026-08-25',
     startDate: '2026-07-06',
     deadlineDate: '2026-08-28',
     intro:
-      '학자금 대출 이자 갚느라 부담스러웠다면 주목하세요. 부산시가 대학(원)생과 졸업생의 이자 부담을 덜어주는 사업인데, **공식 마감일이 원본 API 정보와 다르니** 꼭 아래 내용부터 확인하고 서둘러주세요.',
+      '학자금 대출 이자 갚느라 부담스러웠다면 주목하세요. 부산시가 대학(원)생과 졸업생의 이자 부담을 대신 갚아주는 사업이에요. 최대 2,000명까지 지원하니 대상이라면 서둘러 챙겨보세요.',
     sections: [
       {
         heading: '누가 지원할 수 있을까?',
@@ -254,13 +254,14 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: '지원 혜택 총정리!',
         paragraphs: [
           '**2025년 7월부터 2026년 6월까지 발생한 학자금대출 이자 금액만큼**을 원금 상환으로 지원해줘요. 즉 이자 낸 만큼 원금이 그만큼 줄어드는 효과라고 보면 돼요.',
+          '지원금은 따로 통장으로 들어오는 게 아니라, **12월 중 대출 원리금에서 바로 차감**되는 방식이에요. 별도로 환급을 신청하거나 기다릴 필요 없이 자동으로 반영돼요.',
         ],
       },
       {
-        heading: '⚠️ 마감일이 원본 자료와 실제로 달라요',
+        heading: '신청은 이렇게 하면 돼요',
         paragraphs: [
-          '온통청년 API 원문에는 접수기간이 2026년 7월 1일~8월 31일로 나와 있는데, 부산시 공식 청년플랫폼과 여러 언론 보도를 직접 대조해본 결과 실제 마감일은 **2026년 8월 28일**로, 원문보다 **3일이나 더 빠른** 것으로 확인됐어요. 신청 예정이라면 8월 31일이 아니라 **8월 28일까지**라고 생각하고 서둘러 준비하시길 권해요.',
-          '아쉽게도 구체적인 신청 방법은 원문에 따로 안내돼 있지 않아서, 아래 공식 링크에서 최신 공지를 직접 확인하는 게 가장 정확해요.',
+          '신청 기간은 **2026년 7월 6일부터 8월 28일까지**예요. **부산청년플랫폼에서 온라인으로만 신청**할 수 있어요.',
+          '재학·휴학생은 **재학증명서나 휴학증명서**를, 졸업생은 **졸업증명서 등 3종 서류**를 함께 준비해서 신청 기간 안에 제출하면 돼요.',
         ],
       },
       {
@@ -272,7 +273,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         heading: '신청 전 체크리스트 ✅',
         paragraphs: [
-          '✅ 부산지역 대학 재학·휴학 중이거나 졸업 2년 이내 미취업 부산 거주자인가요? ✅ 2025년 7월~2026년 6월 사이 발생한 대출이자가 있나요? ✅ 8월 28일(실제 마감일) 전까지 신청 준비를 마칠 수 있나요? 마지막 항목이 특히 중요해요 — 원문 마감일(8/31)만 믿고 미루면 안 돼요.',
+          '✅ 부산지역 대학 재학·휴학 중이거나 졸업 2년 이내 미취업 부산 거주자인가요? ✅ 2025년 7월~2026년 6월 사이 발생한 대출이자가 있나요? ✅ 재학·휴학증명서(또는 졸업증명서 등 3종)를 준비했나요? ✅ 8월 28일 전까지 부산청년플랫폼에서 신청을 마칠 수 있나요?',
         ],
       },
     ],
@@ -281,24 +282,20 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: '한국장학재단', url: 'https://www.kosaf.go.kr' },
     ],
     thumbnail: '/blog/busan-student-loan-interest-support/thumbnail.png',
-    // 2026-08-26: info-period는 "마감일이 원본과 다르다" 문단과 8.28/8.31 팩트가 정확히 일치해서
-    // 그 문단 바로 위에 붙임. info-steps는 재학·휴학증명서 등 원문엔 없던 신청 절차 디테일이 담겨
-    // 있는데, "구체적인 신청 방법은 원문에 안내돼 있지 않다"는 문장 바로 옆에 두면 모순돼 보여서
-    // 그 문단은 피하고 이런 분이라면 섹션 앞에 배치함.
     images: [
       {
         src: '/blog/busan-student-loan-interest-support/info-period.png',
-        alt: '부산 학자금 대출이자 지원 신청기간 (7.6 ~ 8.28, 원문 8.31보다 3일 빠름)',
-        position: { section: 2, paragraph: 0 }, // "실제 마감일은 8월 28일" 문단 위
+        alt: '부산 학자금 대출이자 지원 신청기간 (7.6 ~ 8.28)',
+        position: { section: 2, paragraph: 0 }, // "신청 기간은 7월 6일부터 8월 28일까지예요" 문단 위
       },
       {
         src: '/blog/busan-student-loan-interest-support/info-steps.png',
         alt: '부산 학자금 대출이자 지원 신청 5단계: 자격 확인부터 원금 차감까지',
-        position: { section: 3, paragraph: 0 },
+        position: { section: 2, paragraph: 1 }, // "재학·휴학생은 서류를..." 문단 위
       },
       {
         src: '/blog/busan-student-loan-interest-support/info-final-summary.png',
-        alt: '부산 학자금 대출이자 지원 대상·지원내용·마감일 한눈에 정리',
+        alt: '부산 학자금 대출이자 지원 대상·지원내용·신청기간 한눈에 정리',
         position: 'end',
       },
     ],
@@ -348,20 +345,20 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '복지로에서 신청하기', url: 'https://www.bokjiro.go.kr/' }],
-    thumbnail: '/blog/gwangju-youth-rent-support/thumbnail.jpg',
+    thumbnail: '/blog/gwangju-youth-rent-support/thumbnail.png',
     images: [
       {
-        src: '/blog/gwangju-youth-rent-support/info-steps.jpg',
+        src: '/blog/gwangju-youth-rent-support/info-steps.png',
         alt: '청년월세지원 신청 5단계: 자격 확인부터 소급 지급까지',
         position: { section: 2, paragraph: 0 }, // "온라인은 복지로에서..." 문단 위
       },
       {
-        src: '/blog/gwangju-youth-rent-support/info-period.jpg',
+        src: '/blog/gwangju-youth-rent-support/info-period.png',
         alt: '청년월세지원 실제 접수 시기 (매년 3~5월, 놓치면 1년 대기)',
         position: { section: 2, paragraph: 1 }, // "접수 시기가 정해져 있어요. 매년 3~5월..." 문단 위
       },
       {
-        src: '/blog/gwangju-youth-rent-support/info-final-summary.jpg',
+        src: '/blog/gwangju-youth-rent-support/info-final-summary.png',
         alt: '청년월세지원 대상·금액·기간·접수시기 한눈에 정리',
         position: 'end',
       },
@@ -416,23 +413,23 @@ export const BLOG_POSTS: BlogPost[] = [
         url: 'https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancClssCd=PBC010&schStr=%EA%B2%BD%EC%A7%84%EB%8C%80%ED%9A%8C&schM=view&pbancSn=176910',
       },
     ],
-    thumbnail: '/blog/k-startup-awards/thumbnail.jpg',
+    thumbnail: '/blog/k-startup-awards/thumbnail.png',
     // 2026-08-26: 신청방법 카드는 예선리그/본선 등 원문에 없는 진행 절차 디테일을 담고 있고,
     // 우리 글은 "구체적인 신청 방법은 안내돼 있지 않다"고 써놨음 — 그 문장 바로 옆에 두면
     // 모순돼 보여서 이런 분이라면 섹션 앞으로 옮김(부산 학자금대출 글과 같은 처리).
     images: [
       {
-        src: '/blog/k-startup-awards/info-period.jpg',
+        src: '/blog/k-startup-awards/info-period.png',
         alt: 'K-스타트업 2026 접수기간 (3.27 ~ 8.31)',
         position: { section: 2, paragraph: 0 }, // "접수 마감은 2026년 8월 31일이에요" 문단 위
       },
       {
-        src: '/blog/k-startup-awards/info-steps.jpg',
+        src: '/blog/k-startup-awards/info-steps.png',
         alt: 'K-스타트업 2026 신청방법 5단계: 자격 확인부터 본선·왕중왕전까지',
         position: { section: 3, paragraph: 0 },
       },
       {
-        src: '/blog/k-startup-awards/info-final-summary.jpg',
+        src: '/blog/k-startup-awards/info-final-summary.png',
         alt: 'K-스타트업 2026 지원자격·시상·상금·접수기간 한눈에 정리',
         position: 'end',
       },
@@ -485,20 +482,20 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '원주시 프로그램 신청', url: 'https://www.wonju.go.kr/wjyouth/viewTnWjyouthProgrmU.do?progrmNo=52&key=5942' },
     ],
-    thumbnail: '/blog/wonju-interview-suit-rental/thumbnail.jpg',
+    thumbnail: '/blog/wonju-interview-suit-rental/thumbnail.png',
     images: [
       {
-        src: '/blog/wonju-interview-suit-rental/info-period.jpg',
+        src: '/blog/wonju-interview-suit-rental/info-period.png',
         alt: '원주 청년 면접정장 무료대여 신청기간 (2.2 ~ 11.30)',
         position: { section: 2, paragraph: 0 }, // "신청 기간은 2026년 2월 2일부터..." 문단 위
       },
       {
-        src: '/blog/wonju-interview-suit-rental/info-steps.jpg',
+        src: '/blog/wonju-interview-suit-rental/info-steps.png',
         alt: '면접정장 대여 신청방법 5단계: 자격 확인부터 3박 4일 대여까지',
         position: { section: 2, paragraph: 1 }, // "방문 신청은 청년라운지에서..." 문단 위
       },
       {
-        src: '/blog/wonju-interview-suit-rental/info-final-summary.jpg',
+        src: '/blog/wonju-interview-suit-rental/info-final-summary.png',
         alt: '면접정장 무료대여 대상·지원내용·신청기간 한눈에 정리',
         position: 'end',
       },
@@ -550,20 +547,20 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '충남청년포털 공고 보기', url: 'https://youth.chungnam.go.kr/web/main/customSupp/M040-06/view?bizId=A20260402LC000000000003165' },
     ],
-    thumbnail: '/blog/asan-young-rich-financial-counseling/thumbnail.jpg',
+    thumbnail: '/blog/asan-young-rich-financial-counseling/thumbnail.png',
     images: [
       {
-        src: '/blog/asan-young-rich-financial-counseling/info-period.jpg',
+        src: '/blog/asan-young-rich-financial-counseling/info-period.png',
         alt: '아산 청년 재무상담 영앤리치 신청기간 (2.1 ~ 11.30, 선착순)',
         position: { section: 0, paragraph: 0 },
       },
       {
-        src: '/blog/asan-young-rich-financial-counseling/info-steps.jpg',
+        src: '/blog/asan-young-rich-financial-counseling/info-steps.png',
         alt: '영앤리치 신청방법 5단계: 자격 확인부터 1:1 상담까지',
         position: { section: 2, paragraph: 0 }, // "신청서와 증빙서류를 이메일로..." 문단 위
       },
       {
-        src: '/blog/asan-young-rich-financial-counseling/info-final-summary.jpg',
+        src: '/blog/asan-young-rich-financial-counseling/info-final-summary.png',
         alt: '영앤리치 대상·상담내용·신청기간·증빙서류 한눈에 정리',
         position: 'end',
       },
@@ -613,20 +610,20 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '여수시립도서관 신청 바로가기', url: 'https://yslib.yeosu.go.kr/youth' }],
-    thumbnail: '/blog/yeosu-book-purchase-support/thumbnail.jpg',
+    thumbnail: '/blog/yeosu-book-purchase-support/thumbnail.png',
     images: [
       {
-        src: '/blog/yeosu-book-purchase-support/info-period.jpg',
+        src: '/blog/yeosu-book-purchase-support/info-period.png',
         alt: '여수 청년 도서구입비 지원 신청기간 (2.1 ~ 11.30)',
         position: { section: 0, paragraph: 0 },
       },
       {
-        src: '/blog/yeosu-book-purchase-support/info-steps.jpg',
+        src: '/blog/yeosu-book-purchase-support/info-steps.png',
         alt: '도서구입비 지원 신청방법 5단계: 회원증 발급부터 50% 지원까지',
         position: { section: 2, paragraph: 0 }, // "여수시립도서관 누리집에서..." 문단 위
       },
       {
-        src: '/blog/yeosu-book-purchase-support/info-final-summary.jpg',
+        src: '/blog/yeosu-book-purchase-support/info-final-summary.png',
         alt: '여수 도서구입비 지원 대상·금액·인정도서·신청기간 한눈에 정리',
         position: 'end',
       },
@@ -913,6 +910,24 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: '고용24에서 확인하기', url: 'https://www.work24.go.kr/wk/a/b/1700/themeEmpInfoSrchList.do' },
       { label: '행정안전부 공고', url: 'https://mois.go.kr/frt/bbs/type002/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000215&nttId=126775' },
     ],
+    thumbnail: '/blog/social-solidarity-economy-work-experience/thumbnail.png',
+    images: [
+      {
+        src: '/blog/social-solidarity-economy-work-experience/info-period.png',
+        alt: '사회연대경제 청년일경험 신청기간 (6.1 ~ 9.30, 지역별 상이)',
+        position: { section: 2, paragraph: 0 }, // "고용24에서 신청하면 되는데..." 문단 위
+      },
+      {
+        src: '/blog/social-solidarity-economy-work-experience/info-steps.png',
+        alt: '사회연대경제 청년일경험 신청방법 5단계: 자격 확인부터 이력확인서까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/social-solidarity-economy-work-experience/info-final-summary.png',
+        alt: '사회연대경제 청년일경험 대상·참여수당·신청방법 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'youth-culture-facility-fee-support',
@@ -959,6 +974,24 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sourceLinks: [
       { label: '충남청년포털 공고 보기', url: 'https://youth.chungnam.go.kr/web/main/customSupp/M060-10/view?bizId=A20260401LC000000000003097' },
+    ],
+    thumbnail: '/blog/youth-culture-facility-fee-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/youth-culture-facility-fee-support/info-period.png',
+        alt: '청년 문화시설 관람비 지원 신청기간 (1.1 ~ 11.30)',
+        position: { section: 2, paragraph: 0 }, // "신청서와 구비서류를..." 문단 위
+      },
+      {
+        src: '/blog/youth-culture-facility-fee-support/info-steps.png',
+        alt: '청년 문화시설 관람비 지원 신청방법 5단계: 자격 확인부터 상품권 지급까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/youth-culture-facility-fee-support/info-final-summary.png',
+        alt: '청년 문화시설 관람비 지원 대상·환급금액·신청방법 한눈에 정리',
+        position: 'end',
+      },
     ],
   },
   {
@@ -1007,6 +1040,24 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: 'GCC사관학교 접수 바로가기', url: 'https://gccaca.kr/board.es?mid=a10405000000&bid=0001&act=view&list_no=928' },
     ],
+    thumbnail: '/blog/gwangju-qa-bootcamp/thumbnail.png',
+    images: [
+      {
+        src: '/blog/gwangju-qa-bootcamp/info-period.png',
+        alt: '광주 콘텐츠 테크하이어 QA 과정 접수기간 (8.14 ~ 9.7)',
+        position: { section: 2, paragraph: 0 }, // "접수 마감은 2026년 9월 7일이에요" 문단 위
+      },
+      {
+        src: '/blog/gwangju-qa-bootcamp/info-steps.png',
+        alt: 'QA 과정 신청방법 5단계: 자격 확인부터 실무과제까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/gwangju-qa-bootcamp/info-final-summary.png',
+        alt: '광주 콘텐츠 테크하이어 QA 과정 대상·커리큘럼·접수기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'seosan-college-student-part-time-job',
@@ -1052,6 +1103,24 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '충남청년포털 공고 보기', url: 'https://youth.chungnam.go.kr/web/main/customSupp/M030-01/view?bizId=A20260401LC000000000003107' },
     ],
+    thumbnail: '/blog/seosan-college-student-part-time-job/thumbnail.png',
+    images: [
+      {
+        src: '/blog/seosan-college-student-part-time-job/info-period.png',
+        alt: '서산시 대학생 아르바이트 접수기간 (7.1 ~ 8.31)',
+        position: { section: 2, paragraph: 0 }, // "접수는 2026년 8월 31일까지이고..." 문단 위
+      },
+      {
+        src: '/blog/seosan-college-student-part-time-job/info-steps.png',
+        alt: '서산시 대학생 아르바이트 신청방법 5단계: 자격 확인부터 근무 시작까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/seosan-college-student-part-time-job/info-final-summary.png',
+        alt: '서산시 대학생 아르바이트 대상·지원내용·접수기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'ulsan-u-fly-global-talent',
@@ -1060,7 +1129,7 @@ export const BLOG_POSTS: BlogPost[] = [
     categoryLabel: '교육',
     orgName: '울산광역시',
     publishedDate: '2026-08-25',
-    startDate: '2025-08-01',
+    startDate: '2026-08-01',
     deadlineDate: '2026-08-31',
     intro:
       '국제기구에서 일하는 커리어를 꿈꿔본 적 있나요? 울산시가 운영하는 U-FLY 사업은 청년을 실제로 UN 산하 기구 등에 파견해서 실무 경험을 쌓게 해주는, 흔치 않은 기회예요.',
@@ -1097,6 +1166,24 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [],
+    thumbnail: '/blog/ulsan-u-fly-global-talent/thumbnail.png',
+    images: [
+      {
+        src: '/blog/ulsan-u-fly-global-talent/info-period.png',
+        alt: '울산 U-FLY 신청기간 (8.1 ~ 8.31)',
+        position: { section: 2, paragraph: 0 }, // "사업기간이 2026년 8월 31일까지로 명시돼..." 문단 위
+      },
+      {
+        src: '/blog/ulsan-u-fly-global-talent/info-steps.png',
+        alt: '울산 U-FLY 신청방법 5단계: 대상 확인부터 국제기구 파견까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/ulsan-u-fly-global-talent/info-final-summary.png',
+        alt: '울산 U-FLY 대상·파견기관·지원내용·신청기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'gwangju-net-zero-living-lab-contest',
@@ -1143,6 +1230,24 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sourceLinks: [
       { label: '광주청년포털 공고 보기', url: 'https://youth.gwangju.go.kr/www/50?siteId=www&policyId=1439&url=%2Fwww%2Fpolicy%2FgjYgPolicyView' },
+    ],
+    thumbnail: '/blog/gwangju-net-zero-living-lab-contest/thumbnail.png',
+    images: [
+      {
+        src: '/blog/gwangju-net-zero-living-lab-contest/info-period.png',
+        alt: '청년 넷제로 리빙랩 공모전 접수기간 (9.1 ~ 10.2)',
+        position: { section: 2, paragraph: 0 }, // "이메일로만 접수 가능하고..." 문단 위
+      },
+      {
+        src: '/blog/gwangju-net-zero-living-lab-contest/info-steps.png',
+        alt: '청년 넷제로 리빙랩 공모전 신청방법 5단계: 대상 확인부터 시상까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/gwangju-net-zero-living-lab-contest/info-final-summary.png',
+        alt: '청년 넷제로 리빙랩 공모전 대상·상금·접수방법 한눈에 정리',
+        position: 'end',
+      },
     ],
   },
 ];
