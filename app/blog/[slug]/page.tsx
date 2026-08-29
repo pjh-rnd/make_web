@@ -8,6 +8,7 @@ import { CalendarWidget } from '@/lib/CalendarWidget';
 import { DeadlineBanner } from '@/lib/DeadlineBanner';
 import { formatMonthDay } from '@/lib/deadlineUtils';
 import { CategoryIllustration } from '@/lib/illustrations';
+import { OtherPoliciesBanner } from '@/lib/OtherPoliciesBanner';
 import { Highlighted } from '@/lib/richText';
 
 // 2026-08-29: 마감 임박 배너(DeadlineBanner)가 매 요청 시가 아니라 "이 페이지가 마지막으로
@@ -50,7 +51,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const primaryLink = post.sourceLinks[0];
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-10 lg:grid lg:grid-cols-[1fr_300px] lg:items-start lg:gap-10">
+    <Fragment>
+      {/* 2026-08-29: "광고처럼, 이런 공고도 있다고 보여주는 창을 맨 위에" — 프로토타입.
+          본문(article)보다도 위, 페이지 맨 꼭대기에 풀너비로 둠. */}
+      <OtherPoliciesBanner excludeSlug={post.slug} />
+      <div className="mx-auto max-w-5xl px-6 py-10 lg:grid lg:grid-cols-[1fr_300px] lg:items-start lg:gap-10">
     <article className="max-w-2xl">
       <Link href="/blog" className="text-sm text-mint hover:underline">
         ← 블로그 목록
@@ -198,5 +203,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <CalendarWidget />
       </aside>
     </div>
+    </Fragment>
   );
 }
