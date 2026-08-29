@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { CATEGORY_COLOR } from '@/lib/colors';
 import { BLOG_POSTS } from '@/lib/blogPosts';
 import { CalendarWidget } from '@/lib/CalendarWidget';
+import { OtherPoliciesBanner } from '@/lib/OtherPoliciesBanner';
 
 export const metadata: Metadata = {
   title: '블로그 — Fit Me',
@@ -25,7 +26,11 @@ const CATEGORY_KEY: Record<string, string> = {
 
 export default function BlogIndex() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-10 lg:grid lg:grid-cols-[1fr_300px] lg:items-start lg:gap-10">
+    <>
+      {/* 2026-08-29: 상세페이지에 먼저 만든 "이런 공고도 놓치지 마세요" 배너를 목록 페이지
+          맨 위에도 동일하게 노출. 여기선 제외할 "지금 보고 있는 글"이 없어서 excludeSlug 생략. */}
+      <OtherPoliciesBanner />
+      <div className="mx-auto max-w-5xl px-6 py-10 lg:grid lg:grid-cols-[1fr_300px] lg:items-start lg:gap-10">
       <div className="max-w-3xl">
         <h1 className="text-2xl font-bold text-ink sm:text-3xl">블로그</h1>
         <p className="mt-2 text-ink-soft">실제 청년정책 공고를 하나씩 골라 신청 조건과 방법을 정리해드려요.</p>
@@ -71,5 +76,6 @@ export default function BlogIndex() {
         <CalendarWidget />
       </aside>
     </div>
+    </>
   );
 }
