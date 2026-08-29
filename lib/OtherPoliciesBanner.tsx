@@ -44,52 +44,29 @@ export function OtherPoliciesBanner({ excludeSlug, count = 3 }: { excludeSlug?: 
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="flex items-center gap-4 rounded-2xl border p-4 transition hover:shadow-md"
+                className="flex flex-col justify-center gap-2 rounded-2xl border px-5 py-6 transition hover:shadow-md"
                 style={{ borderColor: COLORS.line, backgroundColor: COLORS.paper }}
               >
-                {post.thumbnail ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- 다른 카드와 같은 이유
-                  <img
-                    src={post.thumbnail}
-                    alt=""
-                    className="h-16 w-24 shrink-0 rounded-lg border object-cover sm:h-20 sm:w-32"
-                    style={{ borderColor: COLORS.line }}
-                  />
-                ) : (
-                  <div
-                    className="flex h-16 w-24 shrink-0 items-center justify-center rounded-lg border text-2xl sm:h-20 sm:w-32"
-                    style={{ borderColor: COLORS.line, backgroundColor: COLORS.paperRaise }}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span
+                    className="rounded-full px-2.5 py-1 text-xs font-semibold"
+                    style={{ backgroundColor: `${catColor}22`, color: catColor }}
                   >
-                    {post.categoryLabel === '주거' && '🏠'}
-                    {post.categoryLabel === '자산' && '💰'}
-                    {post.categoryLabel === '취업' && '💼'}
-                    {post.categoryLabel === '교육' && '📚'}
-                    {post.categoryLabel === '복지' && '🏥'}
-                    {post.categoryLabel === '참여' && '🙋'}
-                  </div>
-                )}
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span
-                      className="rounded-full px-2 py-0.5 text-[11px] font-semibold"
-                      style={{ backgroundColor: `${catColor}22`, color: catColor }}
-                    >
-                      {post.categoryLabel}
-                    </span>
-                    <span
-                      className="rounded-full px-2 py-0.5 text-[11px] font-bold text-white"
-                      style={{ backgroundColor: dday.phase === 'active' ? COLORS.coral : COLORS.mint }}
-                    >
-                      {dday.label}
-                    </span>
-                  </div>
-                  <p className="mt-1 truncate text-base font-bold" style={{ color: COLORS.ink }}>
-                    {post.title}
-                  </p>
-                  <p className="mt-0.5 truncate text-sm font-semibold" style={{ color: COLORS.mint }}>
-                    {post.hook}
-                  </p>
+                    {post.categoryLabel}
+                  </span>
+                  <span
+                    className="rounded-full px-2.5 py-1 text-xs font-bold text-white"
+                    style={{ backgroundColor: dday.phase === 'active' ? COLORS.coral : COLORS.mint }}
+                  >
+                    {dday.label}
+                  </span>
                 </div>
+                <p className="text-lg font-bold sm:text-xl" style={{ color: COLORS.ink }}>
+                  {post.title}
+                </p>
+                <p className="text-base font-semibold" style={{ color: COLORS.mint }}>
+                  {post.hook}
+                </p>
               </Link>
             );
           })}
