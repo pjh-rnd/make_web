@@ -10,6 +10,12 @@ import { formatMonthDay } from '@/lib/deadlineUtils';
 import { CategoryIllustration } from '@/lib/illustrations';
 import { Highlighted } from '@/lib/richText';
 
+// 2026-08-29: 마감 임박 배너(DeadlineBanner)가 매 요청 시가 아니라 "이 페이지가 마지막으로
+// 생성된 시점"의 new Date()로 D-day를 계산해서, revalidate가 없으면 배포 안 하는 한 날짜가
+// 계속 그대로 박제되는 문제가 있었음(사용자가 발견). 홈페이지(app/page.tsx)와 같은 값으로
+// 맞춰서 1시간마다 재생성되게 함 — 이러면 아무도 안 건드려도 D-day가 매일 알아서 줄어듦.
+export const revalidate = 3600;
+
 export function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({ slug: post.slug }));
 }
