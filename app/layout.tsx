@@ -57,10 +57,13 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
             </Link>
             <nav className="flex gap-6 text-sm font-medium text-ink-soft">
               <Link href="/" className="hover:text-ink">
-                정책 모아보기
+                홈
               </Link>
               <Link href="/blog" className="hover:text-ink">
                 블로그
+              </Link>
+              <Link href="/policies" className="hover:text-ink">
+                전체 정책
               </Link>
             </nav>
           </div>
