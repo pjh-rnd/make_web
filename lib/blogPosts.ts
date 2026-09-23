@@ -676,6 +676,24 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '원주시 프로그램 신청', url: 'https://www.wonju.go.kr/wjyouth/viewTnWjyouthProgrmU.do?progrmNo=53&key=5942' },
     ],
+    thumbnail: '/blog/wonju-study-cafe-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/wonju-study-cafe-support/info-period.png',
+        alt: '원주 스터디카페·독서실 이용료 지원 신청기간 (2.2 ~ 11.30)',
+        position: { section: 2, paragraph: 0 }, // "신청 기간은 2026년 2월 2일부터..." 문단 위
+      },
+      {
+        src: '/blog/wonju-study-cafe-support/info-steps.png',
+        alt: '스터디카페 이용료 지원 신청방법: 서류 준비부터 실비 환급까지',
+        position: { section: 2, paragraph: 1 }, // "주민등록초본, 신청서..." 서류 문단 위
+      },
+      {
+        src: '/blog/wonju-study-cafe-support/info-final-summary.png',
+        alt: '원주 스터디카페 이용료 지원 대상·금액·신청기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'blue-lighthouse-donation-scholarship',
@@ -721,6 +739,24 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     sourceLinks: [{ label: '한국장학재단 신청 바로가기', url: 'https://www.kosaf.go.kr/' }],
+    thumbnail: '/blog/blue-lighthouse-donation-scholarship/thumbnail.png',
+    images: [
+      {
+        src: '/blog/blue-lighthouse-donation-scholarship/info-period.png',
+        alt: '푸른등대 기부장학금 신청기간 (8.26 ~ 9.10)',
+        position: { section: 2, paragraph: 0 }, // "신청 기간은 2026년 8월 26일부터..." 문단 위
+      },
+      {
+        src: '/blog/blue-lighthouse-donation-scholarship/info-steps.png',
+        alt: '푸른등대 기부장학금 신청방법: 한국장학재단 접속부터 결과 발표까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/blue-lighthouse-donation-scholarship/info-final-summary.png',
+        alt: '푸른등대 기부장학금 대상·금액·신청기간·결과발표 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'ai-certificate-support',
@@ -769,6 +805,24 @@ export const BLOG_POSTS: BlogPost[] = [
       { label: '계룡시 신청 바로가기', url: 'https://gyeryong.go.kr/kr/html/sub05/05100302.html' },
       { label: '충남청년포털 공고 보기', url: 'https://youth.chungnam.go.kr/web/main/customSupp/M030-02/view?bizId=A20260401LC000000000003077' },
     ],
+    thumbnail: '/blog/ai-certificate-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/ai-certificate-support/info-period.png',
+        alt: '충남 청년 AI 자격증 취득 지원 신청기간 (5.1 ~ 11.30)',
+        position: { section: 2, paragraph: 0 }, // "상·하반기 각 1회씩 열리는 교육 신청 기간에..." 문단 위
+      },
+      {
+        src: '/blog/ai-certificate-support/info-steps.png',
+        alt: '청년 AI 자격증 지원 신청방법: 대상 확인부터 교육 접수까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/ai-certificate-support/info-final-summary.png',
+        alt: '충남 청년 AI 자격증 지원 대상·인원·신청기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'wonju-ai-interview-practice',
@@ -814,6 +868,20 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sourceLinks: [
       { label: '원주시 프로그램 신청', url: 'https://www.wonju.go.kr/wjyouth/viewTnWjyouthProgrmU.do?progrmNo=56&key=5942' },
+    ],
+    // 2026-09-23: 썸네일/신청기간 카드는 못 받아서(원본 폴더에 신청방법·최종정리 2장만 있었음)
+    // thumbnail 필드는 생략 — 목록 카드는 기존처럼 텍스트만 나옴.
+    images: [
+      {
+        src: '/blog/wonju-ai-interview-practice/info-steps.png',
+        alt: 'AI 면접 체험 지원 신청방법: 청년라운지 방문 또는 네이버폼 접수',
+        position: { section: 2, paragraph: 1 }, // "방문은 청년라운지에서..." 문단 위
+      },
+      {
+        src: '/blog/wonju-ai-interview-practice/info-final-summary.png',
+        alt: '원주 AI 면접 체험 지원 대상·지원내용·신청기간 한눈에 정리',
+        position: 'end',
+      },
     ],
   },
   {
@@ -861,6 +929,26 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sourceLinks: [
       { label: '익산시 청년의숲 바로가기', url: 'https://youthforest.iksan.go.kr/index.iksan' },
+    ],
+    thumbnail: '/blog/iksan-youth-rent-support/thumbnail.png',
+    // 2026-09-23: 본문에 신청 "기간"을 직접 언급하는 문단이 없어서(자격/소득기준 얘기뿐), 국민취업
+    // 지원제도 글과 같은 방식으로 info-period는 첫 문단(대상 소개) 위에 배치.
+    images: [
+      {
+        src: '/blog/iksan-youth-rent-support/info-period.png',
+        alt: '익산형 청년월세 지원 신청기간 (4.15 ~ 9.30)',
+        position: { section: 0, paragraph: 0 },
+      },
+      {
+        src: '/blog/iksan-youth-rent-support/info-steps.png',
+        alt: '익산형 청년월세 지원 신청방법: 온라인 불가, 행정복지센터 방문 접수',
+        position: { section: 2, paragraph: 0 }, // "온라인 신청이 안 되고..." 문단 위
+      },
+      {
+        src: '/blog/iksan-youth-rent-support/info-final-summary.png',
+        alt: '익산형 청년월세 지원 대상·금액·신청기간 한눈에 정리',
+        position: 'end',
+      },
     ],
   },
   {
