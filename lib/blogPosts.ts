@@ -869,9 +869,13 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '원주시 프로그램 신청', url: 'https://www.wonju.go.kr/wjyouth/viewTnWjyouthProgrmU.do?progrmNo=56&key=5942' },
     ],
-    // 2026-09-23: 썸네일/신청기간 카드는 못 받아서(원본 폴더에 신청방법·최종정리 2장만 있었음)
-    // thumbnail 필드는 생략 — 목록 카드는 기존처럼 텍스트만 나옴.
+    thumbnail: '/blog/wonju-ai-interview-practice/thumbnail.png',
     images: [
+      {
+        src: '/blog/wonju-ai-interview-practice/info-period.png',
+        alt: 'AI 면접 체험 지원 신청기간 (3.3 ~ 11.27)',
+        position: { section: 2, paragraph: 0 }, // "신청 기간은 2026년 3월 3일부터..." 문단 위
+      },
       {
         src: '/blog/wonju-ai-interview-practice/info-steps.png',
         alt: 'AI 면접 체험 지원 신청방법: 청년라운지 방문 또는 네이버폼 접수',
