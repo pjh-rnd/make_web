@@ -1392,6 +1392,24 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '인천청년정책 공고 보기', url: 'https://youth.incheon.go.kr/youthpolicy/youthPolicyInfoDetail.do?poly_seq=465' },
     ],
+    thumbnail: '/blog/incheon-seohae-certificate-fee-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/incheon-seohae-certificate-fee-support/info-period.png',
+        alt: '인천 서해구 청년 자격증 응시료 지원 신청기간 (2.1 ~ 11.30)',
+        position: { section: 2, paragraph: 0 }, // "신청 기간은 2026년 2월부터..." 문단 위
+      },
+      {
+        src: '/blog/incheon-seohae-certificate-fee-support/info-steps.png',
+        alt: '자격증 응시료 지원 대상·제외대상·지원금액·서류 한눈에 정리',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/incheon-seohae-certificate-fee-support/info-final-summary.png',
+        alt: '인천 서해구 청년 자격증 응시료 지원 대상·금액·신청기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'gwangju-newlywed-jeonse-interest-support',
@@ -1438,6 +1456,24 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sourceLinks: [
       { label: '광주아이키움플랫폼', url: 'https://www.xn--hc0by27bu6atul3dc6t.kr/main/rentSubsidy' },
+    ],
+    thumbnail: '/blog/gwangju-newlywed-jeonse-interest-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/gwangju-newlywed-jeonse-interest-support/info-period.png',
+        alt: '광주 신혼부부 전세자금 대출이자 지원 접수기간 (1.5 ~ 10.30)',
+        position: { section: 2, paragraph: 0 }, // "광주아이키움플랫폼에서 확인한 뒤..." 문단 위
+      },
+      {
+        src: '/blog/gwangju-newlywed-jeonse-interest-support/info-steps.png',
+        alt: '신혼부부 전세자금 대출이자 지원 대상·취급은행·지원비율 한눈에 정리',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/gwangju-newlywed-jeonse-interest-support/info-final-summary.png',
+        alt: '광주 신혼부부 전세자금 대출이자 지원 대상·비율·접수기간 한눈에 정리',
+        position: 'end',
+      },
     ],
   },
   {
@@ -1487,6 +1523,24 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         label: '평택시 공고 보기',
         url: 'https://www.pyeongtaek.go.kr/pyeongtaek/board/post/view.do?mid=0401010000&bcIdx=41&idx=348905',
+      },
+    ],
+    thumbnail: '/blog/pyeongtaek-youth-company-mentoring/thumbnail.png',
+    images: [
+      {
+        src: '/blog/pyeongtaek-youth-company-mentoring/info-period.png',
+        alt: '평택 청년-기업 이어드림 사업 신청기간 (3.2 ~ 10.31)',
+        position: { section: 2, paragraph: 0 }, // "신청 기간은 2026년 3월 2일부터..." 문단 위
+      },
+      {
+        src: '/blog/pyeongtaek-youth-company-mentoring/info-steps.png',
+        alt: '청년-기업 이어드림 프로그램별 신청방법: 멘토링은 QR코드, 만남의 장은 이메일',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/pyeongtaek-youth-company-mentoring/info-final-summary.png',
+        alt: '평택 청년-기업 이어드림 대상·프로그램·신청기간 한눈에 정리',
+        position: 'end',
       },
     ],
   },
@@ -1539,6 +1593,24 @@ export const BLOG_POSTS: BlogPost[] = [
         url: 'https://youth.chungnam.go.kr/web/main/customSupp/M040-06/view?bizId=A20260401LC000000000003072',
       },
     ],
+    thumbnail: '/blog/buyeo-military-accident-insurance-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/buyeo-military-accident-insurance-support/info-period.png',
+        alt: '부여군 군복무 청년 상해보험 운영기간 (3.1 ~ 11.30)',
+        position: { section: 2, paragraph: 0 }, // "상해가 발생했을 때 보험사에 직접 청구..." 문단 위
+      },
+      {
+        src: '/blog/buyeo-military-accident-insurance-support/info-steps.png',
+        alt: '군복무 청년 상해보험 대상·가입방식·보장금액·보장범위 한눈에 정리',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/buyeo-military-accident-insurance-support/info-final-summary.png',
+        alt: '부여군 군복무 청년 상해보험 대상·보장금액·청구처 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'gwangju-pregnant-housework-support',
@@ -1585,6 +1657,24 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sourceLinks: [
       { label: '광주아이키움플랫폼 신청 바로가기', url: 'https://www.xn--hc0by27bu6atul3dc6t.kr/main/housework' },
+    ],
+    thumbnail: '/blog/gwangju-pregnant-housework-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/gwangju-pregnant-housework-support/info-period.png',
+        alt: '광주 임신부 가사지원서비스 접수기간 (7.28 ~ 9.30)',
+        position: { section: 2, paragraph: 0 }, // "온라인시스템(jngji.kr)에 접속해서..." 문단 위
+      },
+      {
+        src: '/blog/gwangju-pregnant-housework-support/info-steps.png',
+        alt: '임신부 가사지원서비스 대상·지원내용·이용방식 한눈에 정리',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/gwangju-pregnant-housework-support/info-final-summary.png',
+        alt: '광주 임신부 가사지원서비스 대상·금액·접수기간 한눈에 정리',
+        position: 'end',
+      },
     ],
   },
 ];
