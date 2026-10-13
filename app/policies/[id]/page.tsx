@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
+import { BLOG_POSTS } from '@/lib/blogPosts';
 import { CATEGORY_COLOR, CATEGORY_ICON, CATEGORY_LABEL, COLORS } from '@/lib/colors';
 import { DeadlineBanner } from '@/lib/DeadlineBanner';
 import { formatMonthDay } from '@/lib/deadlineUtils';
@@ -78,6 +79,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function PolicyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+
+  // 2026-10-13: 사용자 피드백 — 같은 정책을 블로그(사진+늘려쓴 글)로도 다뤘는데 /policies
+  // 상세페이지는 그걸 모르고 항상 짧은 요약만 보여주고 있었음. 더 나은 버전이 있으면 그쪽으로
+  // 보내서 "얇은 버전 vs 두꺼운 버전"이 따로 떠서 중복 콘텐츠처럼 보이는 것도 같이 방지함.
+  const richerPost = BLOG_POSTS.find((post) => post.policyId === id);
+  if (richerPost) redirect(`/blog/${richerPost.slug}`);
+
   const [policy, summary] = await Promise.all([getPolicy(id), getSummary(id)]);
   if (!policy) notFound();
 

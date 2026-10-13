@@ -41,10 +41,14 @@ async function getPolicyPages(): Promise<MetadataRoute.Sitemap> {
 
   const { data: summaries } = await supabaseServer.from('policy_ai_summaries').select('policy_id');
   const summarized = new Set((summaries ?? []).map((s) => s.policy_id));
+  // 블로그 글이 있는 정책은 /policies/[id]가 그 글로 리다이렉트만 하므로(중복 콘텐츠 방지),
+  // sitemap엔 리다이렉트되는 주소 대신 블로그 주소를 넣음(blogPages에 이미 포함돼있으니 건너뜀).
+  const blogCovered = new Set(BLOG_POSTS.map((p) => p.policyId).filter(Boolean));
 
   const seen = new Set<string>();
   const pages: MetadataRoute.Sitemap = [];
   for (const p of policies) {
+    if (blogCovered.has(p.id)) continue;
     const key = `${p.title}|${p.org_name ?? ''}`;
     if (seen.has(key)) continue;
     seen.add(key);

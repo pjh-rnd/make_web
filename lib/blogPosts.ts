@@ -29,6 +29,12 @@ export type BlogPost = {
   // 공식 링크 박스 앞에 삽입됨(예: 전체 내용을 한눈에 정리한 최종 요약 카드).
   thumbnail?: string;
   images?: { src: string; alt: string; position: { section: number; paragraph: number } | 'end' }[];
+  // 2026-10-13: 이 글이 다루는 moa-app Supabase policies.id(=온통청년 plcyNo). 있으면
+  // /policies/[id] 상세페이지가 이 값으로 BLOG_POSTS를 찾아서 블로그 글로 리다이렉트함 — 같은
+  // 정책에 대한 얇은 버전(policy_ai_summaries)과 두꺼운 버전(이 블로그 글)이 따로 떠서 중복
+  // 콘텐츠처럼 보이는 걸 막기 위함(사용자 피드백: "policies에 있는 글을 누르면 사진·늘려쓴
+  // 내용은 안 나온다"). 아직 최근에 추가한 35건만 채워져 있고, 그 이전 22건은 미채움.
+  policyId?: string;
 };
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -1347,6 +1353,7 @@ export const BLOG_POSTS: BlogPost[] = [
   // 만들어주기 전까지) images/thumbnail 필드 생략 — 이러면 기존처럼 이모지 삽화로 자동 대체됨.
   {
     slug: 'incheon-seohae-certificate-fee-support',
+    policyId: '20260722005400213267',
     title: '인천 서해구 청년 자격증 응시료 지원, 연 10만원까지 돌려받는 법',
     hook: '자격증 시험 본 영수증, 그냥 버리지 마세요',
     categoryLabel: '취업',
@@ -1413,6 +1420,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'gwangju-newlywed-jeonse-interest-support',
+    policyId: '20260710005400213254',
     title: '광주 신혼부부 전세자금 대출이자 지원, 자녀 수에 따라 최대 1% 돌려받아요',
     hook: '전세자금 대출 이자, 자녀 있으면 더 많이 돌려받아요',
     categoryLabel: '주거',
@@ -1478,6 +1486,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'pyeongtaek-youth-company-mentoring',
+    policyId: '20260326005400212284',
     title: '평택 청년-기업 이어드림 사업, 멘토링부터 취업 매칭까지',
     hook: '기업 현직자한테 직접 멘토링 받고, 잘하면 채용까지 이어져요',
     categoryLabel: '취업',
@@ -1546,6 +1555,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'buyeo-military-accident-insurance-support',
+    policyId: '20260504005400213053',
     title: '부여군 군복무 청년 상해보험, 사고 나면 최대 3천만원 보장',
     hook: '군 복무 중인 우리 동네 청년, 이미 보험 가입돼있어요',
     categoryLabel: '복지',
@@ -1614,6 +1624,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'gwangju-pregnant-housework-support',
+    policyId: '20260728005400213310',
     title: '광주 임신부 가사지원서비스, 청소·정리 비용 20만원까지 지원',
     hook: '몸이 무거운 요즘, 집안일은 지원받고 맡겨보세요',
     categoryLabel: '복지',
@@ -1679,6 +1690,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'seoul-youth-life-design-school',
+    policyId: '20250316005400210639',
     title: '서울시 청년인생설계학교, 5주 프로그램으로 나를 진단해보기',
     hook: '막막한 20대, 전문 진단 도구로 나를 알아가는 시간',
     categoryLabel: '교육',
@@ -1728,6 +1740,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'gwangju-namgu-photo-support',
+    policyId: '20260728005400213308',
     title: '광주 남구 구직청년 증명사진 촬영지원, 이력서 사진 무료로 찍기',
     hook: '이력서용 증명사진, 지정 사진관에서 무료로 찍어드려요',
     categoryLabel: '취업',
@@ -1775,6 +1788,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'cheongsong-newlywed-rent-support',
+    policyId: '20260325005400212266',
     title: '청송군 청년 신혼부부 월세지원, 최대 2년간 월 30만원',
     hook: '이미 낸 월세, 소득 구간별로 최대 월 30만원까지 돌려받아요',
     categoryLabel: '주거',
@@ -1822,6 +1836,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'jeju-talla-youth-package',
+    policyId: '20260422005400212837',
     title: '제주 탐라청년출발패키지, 전입만 해도 최대 20만원 축하장려금',
     hook: '제주로 이사왔다면, 그것만으로 돈을 받을 수 있어요',
     categoryLabel: '복지',
@@ -1869,6 +1884,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'jeju-working-youth-housing-support',
+    policyId: '20260421005400212786',
     title: '제주 일하는 청년 보금자리 지원, 회사가 주는 주거비 최대 80% 지원',
     hook: '회사에서 주는 기숙사·주거비, 제주도가 그 일부를 대신 내줘요',
     categoryLabel: '주거',
@@ -1916,6 +1932,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'incheon-housing-deposit-loan-interest-extension',
+    policyId: '20260406005400212468',
     title: '인천 청년 주택임차보증금 이자 지원, 대출 연장도 가능해요',
     hook: '전세대출 이자 지원 받고 있다면, 만기 전에 연장부터 챙기세요',
     categoryLabel: '주거',
@@ -1963,6 +1980,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'gwangju-jobseeker-certificate-support',
+    policyId: '20260731005400213314',
     title: '광주 구직청년 자격증 취득지원, 어학·자격증 시험 응시료 지원',
     hook: '한국사, 어학시험, 국가자격증 응시료까지 폭넓게 지원돼요',
     categoryLabel: '교육',
@@ -2010,6 +2028,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'youth-housing-dream-savings-account',
+    policyId: '20260616005400113238',
     title: '청년주택드림청약통장, 청약도 되고 최대 4.5% 이자까지',
     hook: '무주택 청년이라면 일반 청약통장보다 이게 나아요',
     categoryLabel: '자산',
@@ -2058,6 +2077,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'iksan-train-fare-support',
+    policyId: '20260325005400212277',
     title: '익산시 열차운임비 지원, 정기승차권 절반을 돌려받아요',
     hook: 'KTX·SRT 정기권 타고 통근·통학한다면 절반은 익산시가 대신 내줘요',
     categoryLabel: '취업',
@@ -2105,6 +2125,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'ulsan-youth-wellstay-support',
+    policyId: '20260410005400212667',
     title: '울산 청년 웰스테이 지원, 기숙사 임차료 80%까지',
     hook: '회사 기숙사에 산다면, 월세 80%를 시가 대신 내줘요',
     categoryLabel: '주거',
@@ -2152,6 +2173,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'gwangju-startup-guarantee-support',
+    policyId: '20260407005400212572',
     title: '광주 청년창업특례보증, 최대 5천만원 이자 3%p 지원받고 대출',
     hook: '창업자금, 보증료 낮고 이자까지 3%p 깎아주는 특례보증으로',
     categoryLabel: '취업',
@@ -2199,6 +2221,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'jeonju-wedding-public-hall',
+    policyId: '20260428005400212899',
     title: '웨딩 in 전주 공공예식장, 결혼식 장소를 무료로 빌려드려요',
     hook: '전주 유명 장소에서 결혼식, 최대 100만원 부대비용까지 지원',
     categoryLabel: '복지',
@@ -2246,6 +2269,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'jeonnam-youth-hope-job-support',
+    policyId: '20251124005400211937',
     title: '전남 청년 희망 일자리 지원사업, 1년간 월 230만원 보장',
     hook: '취업하면 회사도 나도 각각 200만원씩 인센티브까지 받아요',
     categoryLabel: '취업',
@@ -2293,6 +2317,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'gwangju-namgu-job-incentive',
+    policyId: '20260408005400212623',
     title: '광주 남구 청년 구직자 취업장려금, 취업 6개월 후 50만원',
     hook: '남구에서 취업 성공하고 6개월 버텼다면, 50만원을 받을 수 있어요',
     categoryLabel: '취업',
@@ -2340,6 +2365,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'ulsan-youth-savings-account',
+    policyId: '20260410005400212670',
     title: '울산 청년내일저축계좌, 저축하면 정부가 최대 3배 얹어줘요',
     hook: '3년 모으면 원금의 몇 배가 되는 국가 매칭 적금',
     categoryLabel: '자산',
@@ -2387,6 +2413,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'busan-youth-dodream-center',
+    policyId: '20260513005400213203',
     title: '부산 청년두드림센터, 1:1 취업 상담부터 스터디 공간까지',
     hook: '취업 준비, 혼자 하지 말고 전담 상담사랑 같이 해요',
     categoryLabel: '취업',
@@ -2434,6 +2461,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'artist-activity-savings-account',
+    policyId: '20260528005400113226',
     title: '청년예술인 예술활동 적립계좌, 2년 모으면 최대 240만원 더',
     hook: '예술활동증명만 있다면, 적금에 정부지원금이 그대로 얹어져요',
     categoryLabel: '자산',
@@ -2481,6 +2509,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'cheongsong-local-talent-incentive',
+    policyId: '20260325005400212268',
     title: '청송군 지역인재채용 인센티브, 채용한 회사에 월급 절반 지원',
     hook: '청송에 사는 인재를 뽑으면, 회사가 월급의 절반을 지원받아요',
     categoryLabel: '취업',
@@ -2528,6 +2557,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'pyeongtaek-employment-success-support',
+    policyId: '20260325005400212279',
     title: '평택청년 취업성공 지원사업, 자소서부터 면접까지 1:1 컨설팅',
     hook: '자기소개서 첨삭, 모의면접까지 온라인 1:1로 받아요',
     categoryLabel: '취업',
@@ -2575,6 +2605,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'jeju-shelter-exit-independence-allowance',
+    policyId: '20260421005400212776',
     title: '제주 청소년쉼터 퇴소 자립지원수당, 매달 50만원씩 최대 5년',
     hook: '쉼터를 나온 뒤에도, 제주도가 매달 자립을 응원해줘요',
     categoryLabel: '복지',
@@ -2622,6 +2653,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'gwangju-work-experience-dream-20th',
+    policyId: '20260722005400213281',
     title: '광주청년 일경험드림 20기, 직접 일해보고 급여까지 받아요',
     hook: '자기주도형 5개월, 집중참여형 3개월 — 현장에서 진짜 경험 쌓기',
     categoryLabel: '취업',
@@ -2669,6 +2701,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'ulsan-teen-single-parent-support',
+    policyId: '20260410005400212681',
     title: '울산 청소년한부모 자립 지원, 양육비부터 검정고시까지',
     hook: '어린 나이에 부모가 된 한부모, 울산시가 자립을 지원해요',
     categoryLabel: '복지',
@@ -2716,6 +2749,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'ulsan-self-employed-childcare-support',
+    policyId: '20260402005400212391',
     title: '울산 자영업자 아이와 함께 행복업, 대체인력 인건비 지원',
     hook: '출산·육아로 가게 비우는 동안, 대체인력 인건비를 지원받아요',
     categoryLabel: '취업',
@@ -2763,6 +2797,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'gwangju-startup-leap-package',
+    policyId: '20260429005400212924',
     title: '광주 창업도약패키지, 사업화 자금 최대 2억원 지원',
     hook: '도약기 창업기업이라면, 후속투자 유치까지 이어지는 지원',
     categoryLabel: '취업',
@@ -2808,6 +2843,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'mental-health-counseling-voucher',
+    policyId: '20260415005400112751',
     title: '정신건강 심리상담 바우처, 최대 8회 상담을 국가가 지원',
     hook: '우울·불안으로 힘들다면, 소득에 따라 상담료 대부분을 지원받아요',
     categoryLabel: '복지',
@@ -2855,6 +2891,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'pyeongtaek-youth-center-swimpyo',
+    policyId: '20260325005400212281',
     title: '평택시 청년쉼표, 연습실부터 상담까지 청년 전용 공간',
     hook: '댄스·밴드 연습실, 스터디룸, 공유부엌까지 무료로 대관해요',
     categoryLabel: '복지',
@@ -2902,6 +2939,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'taean-social-service-worker-insurance',
+    policyId: '20260504005400213066',
     title: '태안 사회복무요원 보험, 신청 없이 이미 가입돼있어요',
     hook: '사회복무요원이라면, 다치거나 사고 나도 보험이 있다는 걸 기억하세요',
     categoryLabel: '복지',
@@ -2949,6 +2987,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'borderline-intelligence-youth-support',
+    policyId: '20260718005400113262',
     title: '경계선지능청년지원, 참여수당 20만원 받으며 자립 준비',
     hook: '법적 장애는 아니지만 어려움을 겪는 청년들을 위한 맞춤 지원',
     categoryLabel: '복지',
@@ -2996,6 +3035,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'gwangju-startup-residence-facility',
+    policyId: '20260408005400212601',
     title: '광주 창업하여家, 창업기업 대표를 위한 저렴한 거주+업무 공간',
     hook: '월세 20만원 안팎으로 사무실 겸 주거 공간을 해결해요',
     categoryLabel: '취업',
@@ -3041,6 +3081,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'dangjin-youth-growth-project',
+    policyId: '20260430005400213010',
     title: '당진 청년성장프로젝트, 미취업 청년을 위한 맞춤 프로그램',
     hook: '지역사회 기반 프로그램으로 취업 정책까지 연계해줘요',
     categoryLabel: '취업',
