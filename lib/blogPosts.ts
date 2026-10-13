@@ -29,11 +29,11 @@ export type BlogPost = {
   // 공식 링크 박스 앞에 삽입됨(예: 전체 내용을 한눈에 정리한 최종 요약 카드).
   thumbnail?: string;
   images?: { src: string; alt: string; position: { section: number; paragraph: number } | 'end' }[];
-  // 2026-10-13: 이 글이 다루는 moa-app Supabase policies.id(=온통청년 plcyNo). 있으면
-  // /policies/[id] 상세페이지가 이 값으로 BLOG_POSTS를 찾아서 블로그 글로 리다이렉트함 — 같은
-  // 정책에 대한 얇은 버전(policy_ai_summaries)과 두꺼운 버전(이 블로그 글)이 따로 떠서 중복
-  // 콘텐츠처럼 보이는 걸 막기 위함(사용자 피드백: "policies에 있는 글을 누르면 사진·늘려쓴
-  // 내용은 안 나온다"). 아직 최근에 추가한 35건만 채워져 있고, 그 이전 22건은 미채움.
+  // 2026-10-13: 이 글이 다루는 moa-app Supabase policies.id(=온통청년 plcyNo). 원래
+  // /policies/[id] 상세페이지가 이 값으로 BLOG_POSTS를 찾아서 블로그 글로 리다이렉트하는 데 썼는데,
+  // /policies 자체를 통째로 없애면서(검색/필터 없이 494건을 그냥 나열하는 수준이라 실사용이
+  // 어려웠고, 저품질 대량생성처럼 보일 위험도 있었음) 지금은 안 쓰임 — 나중에 비슷한 기능이
+  // 다시 생기면 쓸 수 있어서 필드 자체는 남겨둠. 최근에 추가한 35건만 채워져 있음.
   policyId?: string;
 };
 

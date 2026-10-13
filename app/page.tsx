@@ -1,47 +1,19 @@
 import Link from 'next/link';
 
 import { BLOG_POSTS } from '@/lib/blogPosts';
-import { CATEGORY_COLOR, CATEGORY_ICON, CATEGORY_LABEL, ddayStyle } from '@/lib/colors';
-import { computeDday, formatMonthDay } from '@/lib/deadlineUtils';
-import { supabaseServer } from '@/lib/supabaseServer';
+import { CATEGORY_COLOR, CATEGORY_LABEL } from '@/lib/colors';
 
 // 2026-09-23: 애드센스 거절(콘텐츠 불충분/자동 생성 페이지) 대응 — 이전엔 홈이 API 원본 데이터를
 // 카드로 나열만 한 목록(링크도 없고 한두 줄짜리 텍스트뿐)이라 첫인상이 "자동 생성 페이지"로
 // 보였을 가능성이 큼. 그 목록 전체는 /policies로 옮기고, 홈은 실제 사람이 쓴 콘텐츠(블로그)를
 // 앞세우는 구조로 재구성함 — 소개 문단도 두 문장에서 늘림.
+// 2026-10-13: /policies(정책 원본 요약 목록+상세) 자체를 통째로 없애기로 함 — 검색/필터도 없이
+// 494건을 그냥 나열하는 수준이라 실사용이 어려웠고, 틀은 같은데 내용만 다른 페이지 수백 개가
+// 오히려 "저품질 대량생성"으로 보일 위험도 있었음. 그래서 홈도 블로그(사람이 직접 고르고 쓴 글)만
+// 보여주는 구조로 되돌림 — "지금 마감 임박한 정책" 원본 요약 섹션 삭제.
 export const revalidate = 3600;
 
-type PolicyRow = {
-  id: string;
-  category: string;
-  title: string;
-  meta: string;
-  org_name: string | null;
-  start_date: string | null;
-  deadline_date: string | null;
-};
-
-async function getUrgentPolicies(): Promise<PolicyRow[]> {
-  // 2026-10-13: deadline_date 오름차순만 걸면 이미 마감 지난 공고(날짜가 더 "이른" 값)가 먼저
-  // 걸려서 "지금 마감 임박한 정책"이라는 제목 아래 이미 끝난 공고가 뜨는 버그가 있었음 — 오늘
-  // 날짜 이후로 마감일이 남은 것만 걸러서 가져오도록 고침.
-  const todayStr = new Date().toISOString().slice(0, 10);
-  const { data, error } = await supabaseServer
-    .from('policies')
-    .select('id, category, title, meta, org_name, start_date, deadline_date')
-    .gte('deadline_date', todayStr)
-    .order('deadline_date', { ascending: true, nullsFirst: false })
-    .range(0, 5);
-
-  if (error) {
-    console.error('[home] 정책 목록 조회 실패:', error.message);
-    return [];
-  }
-  return data ?? [];
-}
-
-export default async function Home() {
-  const urgentPolicies = await getUrgentPolicies();
+export default function Home() {
   const recentPosts = [...BLOG_POSTS]
     .sort((a, b) => b.publishedDate.localeCompare(a.publishedDate))
     .slice(0, 9);
@@ -58,7 +30,7 @@ export default async function Home() {
         </p>
       </section>
 
-      <section className="mb-12">
+      <section>
         <div className="mb-4 flex items-end justify-between">
           <h2 className="text-xl font-bold text-ink">블로그에서 최근 올라온 글</h2>
           <Link href="/blog" className="text-sm font-semibold text-mint hover:underline">
@@ -88,56 +60,6 @@ export default async function Home() {
                   <p className="mt-1 line-clamp-2 text-sm font-semibold text-mint">{post.hook}</p>
                 </div>
                 <p className="mt-4 truncate text-xs text-ink-soft">{post.orgName}</p>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      <section>
-        <div className="mb-4 flex items-end justify-between">
-          <h2 className="text-xl font-bold text-ink">지금 마감 임박한 정책</h2>
-          <Link href="/policies" className="text-sm font-semibold text-mint hover:underline">
-            전체 정책 보기 →
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {urgentPolicies.map((p) => {
-            const dday = computeDday(p.start_date, p.deadline_date);
-            const badge = ddayStyle(dday.phase);
-            const catColor = CATEGORY_COLOR[p.category as keyof typeof CATEGORY_COLOR] ?? '#999';
-            return (
-              <Link
-                key={p.id}
-                href={`/policies/${p.id}`}
-                className="flex flex-col justify-between rounded-2xl border border-line bg-paper-raise p-5 shadow-sm transition hover:shadow-md"
-              >
-                <div>
-                  <div className="mb-3 flex items-center justify-between">
-                    <span
-                      className="rounded-full px-2.5 py-1 text-xs font-semibold"
-                      style={{ backgroundColor: `${catColor}22`, color: catColor }}
-                    >
-                      {CATEGORY_ICON[p.category] ?? ''} {CATEGORY_LABEL[p.category] ?? p.category}
-                    </span>
-                    <span
-                      className="rounded-full px-2.5 py-1 text-xs font-semibold"
-                      style={{ backgroundColor: badge.bg, color: badge.text }}
-                    >
-                      {dday.label}
-                    </span>
-                  </div>
-                  <h3 className="line-clamp-2 text-base font-bold text-ink">{p.title}</h3>
-                  <p className="mt-1 text-sm text-ink-soft">{p.meta}</p>
-                </div>
-                <div className="mt-4 flex items-center justify-between text-xs text-ink-soft">
-                  <span>
-                    {p.start_date && p.deadline_date
-                      ? `${formatMonthDay(p.start_date)} ~ ${formatMonthDay(p.deadline_date)}`
-                      : '상시모집'}
-                  </span>
-                  <span className="truncate pl-2">{p.org_name}</span>
-                </div>
               </Link>
             );
           })}

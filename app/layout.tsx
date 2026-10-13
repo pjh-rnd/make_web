@@ -62,9 +62,6 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
               <Link href="/blog" className="hover:text-ink">
                 블로그
               </Link>
-              <Link href="/policies" className="hover:text-ink">
-                전체 정책
-              </Link>
             </nav>
           </div>
         </header>
