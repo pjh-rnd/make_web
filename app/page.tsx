@@ -22,9 +22,14 @@ type PolicyRow = {
 };
 
 async function getUrgentPolicies(): Promise<PolicyRow[]> {
+  // 2026-10-13: deadline_date 오름차순만 걸면 이미 마감 지난 공고(날짜가 더 "이른" 값)가 먼저
+  // 걸려서 "지금 마감 임박한 정책"이라는 제목 아래 이미 끝난 공고가 뜨는 버그가 있었음 — 오늘
+  // 날짜 이후로 마감일이 남은 것만 걸러서 가져오도록 고침.
+  const todayStr = new Date().toISOString().slice(0, 10);
   const { data, error } = await supabaseServer
     .from('policies')
     .select('id, category, title, meta, org_name, start_date, deadline_date')
+    .gte('deadline_date', todayStr)
     .order('deadline_date', { ascending: true, nullsFirst: false })
     .range(0, 5);
 

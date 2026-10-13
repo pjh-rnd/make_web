@@ -13,7 +13,13 @@ import { supabaseServer } from '@/lib/supabaseServer';
 // 없었던 게 원인 중 하나로 보여서 각 카드를 /policies/[id]로 연결함(app/policies/[id]/page.tsx).
 // 동시에 온통청년 API가 같은 정책을 다른 plcyNo로 중복 등록해둔 경우가 있어서(518건 중 24건)
 // 제목+기관 기준으로 중복 제거함.
+//
+// 2026-10-13: 사용자가 "마감 지난 공고를 못 찾겠다"고 지적 — deadline_date 오름차순 정렬이라
+// 이미 마감된 공고(날짜가 더 "이른" 값)가 리스트 맨 위를 차지하고 있었음(버그). 진행중/시작전
+// 공고를 먼저 보여주고 마감된 건 맨 뒤로 보내도록 phase 기준으로 다시 정렬함.
 export const revalidate = 3600;
+
+const PHASE_RANK: Record<string, number> = { active: 0, before: 1, rolling: 2, closed: 3 };
 
 export const metadata: Metadata = {
   title: '전체 정책 모아보기 — Fit Me',
@@ -49,7 +55,16 @@ async function getPolicies(): Promise<PolicyRow[]> {
     const key = `${p.title}|${p.org_name ?? ''}`;
     if (!seen.has(key)) seen.set(key, p);
   }
-  return [...seen.values()];
+  const deduped = [...seen.values()];
+
+  // 진행중(active)·시작전(before)·상시(rolling) 순으로 먼저 보여주고, 이미 마감된(closed) 건
+  // 맨 뒤로 보냄 — 같은 phase 안에서는 기존처럼 마감일 오름차순(=더 급한 것부터) 유지.
+  return deduped.sort((a, b) => {
+    const phaseA = PHASE_RANK[computeDday(a.start_date, a.deadline_date).phase];
+    const phaseB = PHASE_RANK[computeDday(b.start_date, b.deadline_date).phase];
+    if (phaseA !== phaseB) return phaseA - phaseB;
+    return (a.deadline_date ?? '9999').localeCompare(b.deadline_date ?? '9999');
+  });
 }
 
 export default async function PoliciesPage() {
