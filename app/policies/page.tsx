@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 import { CATEGORY_COLOR, CATEGORY_ICON, CATEGORY_LABEL, ddayStyle } from '@/lib/colors';
 import { computeDday, formatMonthDay } from '@/lib/deadlineUtils';
@@ -8,6 +9,10 @@ import { supabaseServer } from '@/lib/supabaseServer';
 // 홈(/)에 그대로 있어서, 첫인상이 "API에서 긁어온 카드 나열"로 보였을 가능성이 큼(카드에 링크도
 // 없고 텍스트도 한두 줄뿐). 그래서 이 목록 자체는 별도 페이지(/policies)로 옮기고, 홈은 실제
 // 글(블로그)을 앞세우는 쪽으로 재구성함(app/page.tsx 참고).
+// 2026-10-13: 애드센스가 "가치 별로 없는 콘텐츠"로 재거절 — 카드에 클릭해서 들어갈 상세 페이지가
+// 없었던 게 원인 중 하나로 보여서 각 카드를 /policies/[id]로 연결함(app/policies/[id]/page.tsx).
+// 동시에 온통청년 API가 같은 정책을 다른 plcyNo로 중복 등록해둔 경우가 있어서(518건 중 24건)
+// 제목+기관 기준으로 중복 제거함.
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
@@ -36,7 +41,15 @@ async function getPolicies(): Promise<PolicyRow[]> {
     console.error('[policies] 정책 목록 조회 실패:', error.message);
     return [];
   }
-  return data ?? [];
+
+  // 온통청년 원문 자체가 같은 정책을 다른 번호로 중복 등록해둔 경우가 있어서, 제목+기관이 같으면
+  // 마감일이 더 빠른(=더 먼저 끝나는, 보통 더 최근에 갱신된) 쪽 하나만 남김.
+  const seen = new Map<string, PolicyRow>();
+  for (const p of data ?? []) {
+    const key = `${p.title}|${p.org_name ?? ''}`;
+    if (!seen.has(key)) seen.set(key, p);
+  }
+  return [...seen.values()];
 }
 
 export default async function PoliciesPage() {
@@ -58,8 +71,9 @@ export default async function PoliciesPage() {
           const badge = ddayStyle(dday.phase);
           const catColor = CATEGORY_COLOR[p.category as keyof typeof CATEGORY_COLOR] ?? '#999';
           return (
-            <article
+            <Link
               key={p.id}
+              href={`/policies/${p.id}`}
               className="flex flex-col justify-between rounded-2xl border border-line bg-paper-raise p-5 shadow-sm transition hover:shadow-md"
             >
               <div>
@@ -88,7 +102,7 @@ export default async function PoliciesPage() {
                 </span>
                 <span className="truncate pl-2">{p.org_name}</span>
               </div>
-            </article>
+            </Link>
           );
         })}
       </div>

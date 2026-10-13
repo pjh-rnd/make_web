@@ -104,7 +104,7 @@ export default async function Home() {
             return (
               <Link
                 key={p.id}
-                href="/policies"
+                href={`/policies/${p.id}`}
                 className="flex flex-col justify-between rounded-2xl border border-line bg-paper-raise p-5 shadow-sm transition hover:shadow-md"
               >
                 <div>
