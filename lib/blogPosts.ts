@@ -2280,6 +2280,24 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '청년몽땅정보통 공고 보기', url: 'https://youth.seoul.go.kr/youthConts.do?key=2310200020&sc_pbancSeCd=013&sc_bbsStngSn=2212200001&sc_bbsCtgrySn=2310200012&sc_qnaCtgryCd=&sc_faqCtgryCd=008' },
     ],
+    thumbnail: '/blog/seoul-youth-life-design-school/thumbnail.png',
+    images: [
+      {
+        src: '/blog/seoul-youth-life-design-school/info-period.png',
+        alt: '서울 청년인생설계학교 2026년 3기 신청기간 (9.7 ~ 9.28)',
+        position: { section: 2, paragraph: 0 }, // "2026년 3기 모집 기간은..." 문단 위
+      },
+      {
+        src: '/blog/seoul-youth-life-design-school/info-steps.png',
+        alt: '청년인생설계학교 신청방법 5단계: 자격 확인부터 5주 참여까지',
+        position: { section: 2, paragraph: 1 }, // "청년몽땅정보통에서 온라인으로 신청하면..." 문단 위
+      },
+      {
+        src: '/blog/seoul-youth-life-design-school/info-final-summary.png',
+        alt: '서울 청년인생설계학교 대상·코스·신청기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'gwangju-namgu-photo-support',
@@ -2331,6 +2349,24 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sourceLinks: [
       { label: '광주 남구청 공고 보기', url: 'https://www.namgu.gwangju.kr/board.es?mid=a10604010000&bid=0001' },
+    ],
+    thumbnail: '/blog/gwangju-namgu-photo-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/gwangju-namgu-photo-support/info-period.png',
+        alt: '광주 남구 증명사진 촬영지원 신청기간 (7.27 ~ 12.18)',
+        position: { section: 2, paragraph: 0 }, // "신청 기간은 2026년 7월 27일부터..." 문단 위
+      },
+      {
+        src: '/blog/gwangju-namgu-photo-support/info-steps.png',
+        alt: '증명사진 촬영지원 신청방법 5단계: 자격 확인부터 사진관 촬영까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/gwangju-namgu-photo-support/info-final-summary.png',
+        alt: '광주 남구 증명사진 촬영지원 대상·내용·지정사진관·신청기간 한눈에 정리',
+        position: 'end',
+      },
     ],
   },
   {
@@ -2384,6 +2420,24 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '청송군청 홈페이지', url: 'http://www.gbhome.kr' },
     ],
+    thumbnail: '/blog/cheongsong-newlywed-rent-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/cheongsong-newlywed-rent-support/info-period.png',
+        alt: '청송군 신혼부부 월세지원 신청기간 (1.14 ~ 12.31)',
+        position: { section: 2, paragraph: 0 }, // "신청 기간은 2026년 1월 14일부터..." 문단 위
+      },
+      {
+        src: '/blog/cheongsong-newlywed-rent-support/info-steps.png',
+        alt: '신혼부부 월세지원 신청방법 5단계: 자격 확인부터 반기별 수령까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/cheongsong-newlywed-rent-support/info-final-summary.png',
+        alt: '청송군 신혼부부 월세지원 대상·금액·신청기간 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'jeju-talla-youth-package',
@@ -2436,6 +2490,26 @@ export const BLOG_POSTS: BlogPost[] = [
     sourceLinks: [
       { label: '제주도청 공고문', url: 'https://www.jeju.go.kr/news/news/law/jeju2.htm#A_64526' },
     ],
+    // 2026-10-19: 본문에 신청 "기간"을 직접 언급하는 문단이 없어서(자격 얘기뿐), 익산형 청년월세
+    // 지원 글과 같은 방식으로 info-period는 첫 문단(대상 소개) 위에 배치.
+    thumbnail: '/blog/jeju-talla-youth-package/thumbnail.png',
+    images: [
+      {
+        src: '/blog/jeju-talla-youth-package/info-period.png',
+        alt: '제주 탐라청년출발패키지 신청기간 (2.23 ~ 12.31)',
+        position: { section: 0, paragraph: 0 },
+      },
+      {
+        src: '/blog/jeju-talla-youth-package/info-steps.png',
+        alt: '탐라청년출발패키지 신청방법 5단계: 자격 확인부터 장려금 수령까지',
+        position: { section: 2, paragraph: 0 }, // "정부24에서 온라인 신청만 가능해요..." 문단 위
+      },
+      {
+        src: '/blog/jeju-talla-youth-package/info-final-summary.png',
+        alt: '제주 탐라청년출발패키지 대상·지원금액·신청방법 한눈에 정리',
+        position: 'end',
+      },
+    ],
   },
   {
     slug: 'jeju-working-youth-housing-support',
@@ -2487,6 +2561,24 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     sourceLinks: [
       { label: '제주 일자리지원사업통합플랫폼', url: 'https://www.jeju.go.kr/jejusupport/index.htm' },
+    ],
+    thumbnail: '/blog/jeju-working-youth-housing-support/thumbnail.png',
+    images: [
+      {
+        src: '/blog/jeju-working-youth-housing-support/info-period.png',
+        alt: '제주 일하는 청년 보금자리 지원 신청기간 (1.20 ~ 12.10)',
+        position: { section: 2, paragraph: 0 }, // "회사가 매월 1~10일에 사업 참여를..." 문단 위
+      },
+      {
+        src: '/blog/jeju-working-youth-housing-support/info-steps.png',
+        alt: '일하는 청년 보금자리 지원 신청방법 5단계: 자격 확인부터 분기별 지급까지',
+        position: { section: 3, paragraph: 0 },
+      },
+      {
+        src: '/blog/jeju-working-youth-housing-support/info-final-summary.png',
+        alt: '제주 일하는 청년 보금자리 지원 대상·지원비율·신청기간 한눈에 정리',
+        position: 'end',
+      },
     ],
   },
   {
